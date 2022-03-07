@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["plugin:react/recommended", "airbnb", "prettier"],
+  extends: [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:react/jsx-runtime",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -13,5 +18,12 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
-  rules: {},
+  rules: {
+    "react/jsx-filename-extension": [
+      1,
+      { extensions: [".js", ".jsx", ".ts", ".tsx"] },
+    ],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+  },
 };
