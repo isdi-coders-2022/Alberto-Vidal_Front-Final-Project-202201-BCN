@@ -8,6 +8,9 @@ module.exports = {
     "airbnb",
     "prettier",
     "plugin:react/jsx-runtime",
+    "plugin:@typescript-eslint/recommended",
+    "react-app",
+    "react-app/jest",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -26,5 +29,13 @@ module.exports = {
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
+    "arrow-body-style": ["error", "always"],
+    "react/function-component-definition": [
+      2,
+      {
+        namedComponents: "arrow-function",
+        unnamedComponents: "arrow-function",
+      },
+    ],
   },
 };
