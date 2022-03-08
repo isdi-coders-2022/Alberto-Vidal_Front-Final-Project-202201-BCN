@@ -8,7 +8,7 @@ module.exports = {
     "airbnb",
     "prettier",
     "plugin:react/jsx-runtime",
-    "plugin:@typescript-eslint/recomended",
+    "plugin:@typescript-eslint/recommended",
     "react-app",
     "react-app/jest",
   ],
