@@ -25,5 +25,6 @@ module.exports = {
     ],
     "import/extensions": "off",
     "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
   },
 };
