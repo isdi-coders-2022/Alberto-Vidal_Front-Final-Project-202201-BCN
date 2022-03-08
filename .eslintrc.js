@@ -32,7 +32,10 @@ module.exports = {
     "arrow-body-style": ["error", "always"],
     "react/function-component-definition": [
       2,
-      { namedComponents: "arrow-function" },
+      {
+        namedComponents: "arrow-function",
+        unnamedComponents: "arrow-function",
+      },
     ],
   },
 };

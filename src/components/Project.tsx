@@ -50,7 +50,9 @@ const Card = styled.li`
 const CardButton = styled.button`
   border: none;
   margin: 10px;
-  margin-left: ${(props: buttonProps) => (props.bookmark ? "auto" : "10px")};
+  margin-left: ${(props: buttonProps) => {
+    return props.bookmark ? "auto" : "10px";
+  }};
   height: 48px;
   width: 48px;
   background: url(${(props: buttonProps) => {
@@ -58,11 +60,14 @@ const CardButton = styled.button`
     if (props.comments) return "src/assets/comment-outline.png";
     if (props.share) return "src/assets/share-variant-outline.png";
     if (props.bookmark) return "src/assets/bookmark.png";
+    return "";
   }});
 `;
 
 const Project = (): JSX.Element => {
-  const onClick = (): void => {};
+  const onClick = (): null => {
+    return null;
+  };
   return (
     <Card>
       <div className="author">

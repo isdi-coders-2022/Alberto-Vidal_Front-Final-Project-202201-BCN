@@ -9,12 +9,14 @@ describe("Given a project component", () => {
 
       render(<Project />);
       const images = screen.getAllByRole("img");
-      const buttons = expectedButtons.map((buttonName) =>
-        screen.getByRole("button", { name: buttonName })
-      );
+      const buttons = expectedButtons.map((buttonName) => {
+        return screen.getByRole("button", { name: buttonName });
+      });
 
       expect(images).toHaveLength(expectedNumberOfImages);
-      buttons.forEach((button) => expect(button).toBeInTheDocument());
+      buttons.forEach((button) => {
+        expect(button).toBeInTheDocument();
+      });
     });
   });
 });
