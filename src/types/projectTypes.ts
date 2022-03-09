@@ -1,13 +1,13 @@
-export interface buttonProps {
-  like?: boolean;
-  comments?: boolean;
-  share?: boolean;
-  bookmark?: boolean;
+export interface ProjectsProps {
+  projects: ProjectShape[];
 }
 
 export interface ProjectProps {
-  project: {
-    author: { name: string; avatar: string };
-    preview: string;
-  };
+  project: ProjectShape;
+  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+}
+export interface ProjectShape {
+  author: { name: string; avatar: string };
+  preview: string;
+  id: string;
 }
