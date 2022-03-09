@@ -38,9 +38,7 @@ const Projects = ({ projects }: ProjectsProps): JSX.Element => {
   };
   return (
     <ProjectsList>
-      {projects.map((project): JSX.Element => {
-        return <Project onClick={onClick} key={project.id} project={project} />;
-      })}
+      {projects.map((project): JSX.Element => <Project onClick={onClick} key={project.id} project={project} />)}
     </ProjectsList>
   );
 };
