@@ -15,6 +15,7 @@ const Template = (args: ProjectProps) => {
 export const ProjectCard: ComponentStory<typeof Project> = Template.bind({});
 ProjectCard.args = {
   project: {
+    id: "1",
     author: {
       name: "kiv",
       avatar:

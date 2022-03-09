@@ -36,7 +36,7 @@ const Projects = ({ projects }: ProjectsProps): JSX.Element => {
   return (
     <ProjectsList>
       {projects.map((project): JSX.Element => {
-        return <Project project={project} />;
+        return <Project key={project.id} project={project} />;
       })}
     </ProjectsList>
   );

@@ -9,4 +9,5 @@ export interface ProjectProps {
 export interface ProjectShape {
   author: { name: string; avatar: string };
   preview: string;
+  id: string;
 }

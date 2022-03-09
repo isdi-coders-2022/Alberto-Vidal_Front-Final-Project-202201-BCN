@@ -6,6 +6,7 @@ describe("Given a project component", () => {
     test("Then it should show 2 images and 4 buttons with accessible names: like, coments, share, bookmark", () => {
       const expectedLinkNames = ["like", "comment", "share", "bookmark"];
       const props = {
+        id: "1",
         author: {
           name: "kiv",
           avatar: "avatar",

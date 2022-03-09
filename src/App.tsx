@@ -3,6 +3,7 @@ import Projects from "./components/Projects";
 const App = () => {
   const props = [
     {
+      id: "1",
       author: {
         name: "kiv",
         avatar:
@@ -12,6 +13,7 @@ const App = () => {
         "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
     },
     {
+      id: "2",
       author: {
         name: "kiv",
         avatar:
@@ -21,6 +23,7 @@ const App = () => {
         "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
     },
     {
+      id: "3",
       author: {
         name: "kiv",
         avatar:
