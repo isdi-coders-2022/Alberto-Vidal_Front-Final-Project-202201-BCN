@@ -11,6 +11,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "react-app",
     "react-app/jest",
+    "plugin:storybook/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -24,11 +25,18 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": [
       1,
-      { extensions: [".js", ".jsx", ".ts", ".tsx"] },
+      {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
     ],
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+      },
+    ],
     "arrow-body-style": ["error", "always"],
     "react/function-component-definition": [
       2,
