@@ -60,10 +60,7 @@ const CardButton = styled.a`
   }
 `;
 
-const Project = ({ project }: ProjectProps): JSX.Element => {
-  const onClick = (event: React.MouseEvent<HTMLElement>): void => {
-    event.preventDefault();
-  };
+const Project = ({ project, onClick }: ProjectProps): JSX.Element => {
   return (
     <Card>
       <div className="author">

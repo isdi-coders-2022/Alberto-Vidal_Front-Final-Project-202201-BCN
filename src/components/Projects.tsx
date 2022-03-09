@@ -33,10 +33,13 @@ const ProjectsList = styled.ul`
 `;
 
 const Projects = ({ projects }: ProjectsProps): JSX.Element => {
+  const onClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+  };
   return (
     <ProjectsList>
       {projects.map((project): JSX.Element => {
-        return <Project key={project.id} project={project} />;
+        return <Project onClick={onClick} key={project.id} project={project} />;
       })}
     </ProjectsList>
   );
