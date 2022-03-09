@@ -8,5 +8,6 @@ module.exports = {
     "./src/**/*.ts",
     "!./src/**/main.tsx",
     "!src/stories/**",
+    "!src/**/vite-env.d.ts",
   ],
 };
