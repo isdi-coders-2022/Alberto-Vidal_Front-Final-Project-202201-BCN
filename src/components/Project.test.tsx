@@ -4,7 +4,7 @@ import Project from "./Project";
 describe("Given a project component", () => {
   describe("When it's rendered", () => {
     test("Then it should show 2 images and 4 buttons with accessible names: like, coments, share, bookmark", () => {
-      const expectedButtons = ["like", "comments", "share", "bookmark"];
+      const expectedLinkNames = ["like", "comment", "share", "bookmark"];
       const props = {
         author: {
           name: "kiv",
@@ -16,13 +16,13 @@ describe("Given a project component", () => {
 
       render(<Project project={props} />);
       const images = screen.getAllByRole("img");
-      const buttons = expectedButtons.map((buttonName) => {
-        return screen.getByRole("button", { name: buttonName });
+      const links = expectedLinkNames.map((linkName) => {
+        return screen.getByRole("link", { name: linkName });
       });
 
       expect(images).toHaveLength(expectedNumberOfImages);
-      buttons.forEach((button) => {
-        expect(button).toBeInTheDocument();
+      links.forEach((link) => {
+        expect(link).toBeInTheDocument();
       });
     });
   });
