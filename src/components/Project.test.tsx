@@ -5,9 +5,16 @@ describe("Given a project component", () => {
   describe("When it's rendered", () => {
     test("Then it should show 2 images and 4 buttons with accessible names: like, coments, share, bookmark", () => {
       const expectedButtons = ["like", "comments", "share", "bookmark"];
+      const props = {
+        author: {
+          name: "kiv",
+          avatar: "avatar",
+        },
+        preview: "preview",
+      };
       const expectedNumberOfImages = 2;
 
-      render(<Project />);
+      render(<Project project={props} />);
       const images = screen.getAllByRole("img");
       const buttons = expectedButtons.map((buttonName) => {
         return screen.getByRole("button", { name: buttonName });
