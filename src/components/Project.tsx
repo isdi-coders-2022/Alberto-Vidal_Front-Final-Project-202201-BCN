@@ -8,7 +8,7 @@ import {
 import { ProjectProps } from "../types/projectTypes";
 
 const Card = styled.li`
-  list-style: none
+  margin: 10px;
   position: relative;
   width: 416px;
   height: 377px;
