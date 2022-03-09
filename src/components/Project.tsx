@@ -1,13 +1,8 @@
 import styled from "styled-components";
-
-type buttonProps = {
-  like?: boolean;
-  comments?: boolean;
-  share?: boolean;
-  bookmark?: boolean;
-};
+import { buttonProps, ProjectProps } from "../types/projectTypes";
 
 const Card = styled.li`
+  list-style: none
   position: relative;
   width: 416px;
   height: 377px;
@@ -59,12 +54,11 @@ const CardButton = styled.button`
     if (props.like) return "src/assets/heart-outline.png";
     if (props.comments) return "src/assets/comment-outline.png";
     if (props.share) return "src/assets/share-variant-outline.png";
-    if (props.bookmark) return "src/assets/bookmark.png";
-    return "";
+    return "src/assets/bookmark.png";
   }});
 `;
 
-const Project = (): JSX.Element => {
+const Project = ({ project }: ProjectProps): JSX.Element => {
   const onClick = (): null => {
     return null;
   };
@@ -74,16 +68,16 @@ const Project = (): JSX.Element => {
         <img
           className="author-image"
           alt="author"
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          src={project.author.avatar}
         />
-        <p className="author-name">author</p>
+        <p className="author-name">{project.author.name}</p>
       </div>
       <img
         className="preview"
         width={416}
         height={221}
         alt="preview"
-        src="https://i.pinimg.com/564x/19/11/c3/1911c3e6a20b63d92a6f694fe988aa62.jpg"
+        src={project.preview}
       />
       <div className="buttons">
         <CardButton like title="like" onClick={onClick} />
