@@ -1,5 +1,11 @@
 import styled from "styled-components";
-import { buttonProps, ProjectProps } from "../types/projectTypes";
+import {
+  FavoriteBorder,
+  ChatBubbleOutline,
+  Share,
+  BookmarkBorder,
+} from "@mui/icons-material";
+import { ProjectProps } from "../types/projectTypes";
 
 const Card = styled.li`
   list-style: none
@@ -42,25 +48,21 @@ const Card = styled.li`
   }
 `;
 
-const CardButton = styled.button`
+const CardButton = styled.a`
   border: none;
   margin: 10px;
-  margin-left: ${(props: buttonProps) => {
-    return props.bookmark ? "auto" : "10px";
-  }};
   height: 48px;
   width: 48px;
-  background: url(${(props: buttonProps) => {
-    if (props.like) return "src/assets/heart-outline.png";
-    if (props.comments) return "src/assets/comment-outline.png";
-    if (props.share) return "src/assets/share-variant-outline.png";
-    return "src/assets/bookmark.png";
-  }});
+  color: inherit;
+
+  &:nth-last-child(1) {
+    margin-left: auto;
+  }
 `;
 
 const Project = ({ project }: ProjectProps): JSX.Element => {
-  const onClick = (): null => {
-    return null;
+  const onClick = (event: React.MouseEvent<HTMLElement>): void => {
+    event.preventDefault();
   };
   return (
     <Card>
@@ -80,10 +82,18 @@ const Project = ({ project }: ProjectProps): JSX.Element => {
         src={project.preview}
       />
       <div className="buttons">
-        <CardButton like title="like" onClick={onClick} />
-        <CardButton comments title="comments" onClick={onClick} />
-        <CardButton share title="share" onClick={onClick} />
-        <CardButton bookmark title="bookmark" onClick={onClick} />
+        <CardButton onClick={onClick} href="like" title="like">
+          <FavoriteBorder sx={{ fontSize: 40 }} />
+        </CardButton>
+        <CardButton onClick={onClick} href="comment" title="comment">
+          <ChatBubbleOutline sx={{ fontSize: 40 }} />
+        </CardButton>
+        <CardButton onClick={onClick} href="share" title="share">
+          <Share sx={{ fontSize: 40 }} />
+        </CardButton>
+        <CardButton onClick={onClick} href="bookmark" title="bookmark">
+          <BookmarkBorder sx={{ fontSize: 40 }} />
+        </CardButton>
       </div>
     </Card>
   );
