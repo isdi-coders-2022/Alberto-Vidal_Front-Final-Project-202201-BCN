@@ -19,9 +19,9 @@ describe("Given a project component", () => {
 
       render(<Project project={props} onClick={onClick} />);
       const images = screen.getAllByRole("img");
-      const links = expectedLinkNames.map((linkName) => {
-        return screen.getByRole("link", { name: linkName });
-      });
+      const links = expectedLinkNames.map((linkName) =>
+        screen.getByRole("link", { name: linkName })
+      );
 
       expect(images).toHaveLength(expectedNumberOfImages);
       links.forEach((link) => {

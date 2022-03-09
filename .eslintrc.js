@@ -37,7 +37,11 @@ module.exports = {
         devDependencies: true,
       },
     ],
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      { requireReturnForObjectLiteral: false },
+    ],
     "react/function-component-definition": [
       2,
       {

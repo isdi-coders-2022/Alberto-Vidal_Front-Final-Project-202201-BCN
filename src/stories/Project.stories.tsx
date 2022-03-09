@@ -8,9 +8,7 @@ export default {
   component: Project,
 } as ComponentMeta<typeof Project>;
 
-const Template = (args: ProjectProps) => {
-  return <Project {...args} />;
-};
+const Template = (args: ProjectProps) => <Project {...args} />;
 
 export const ProjectCard: ComponentStory<typeof Project> = Template.bind({});
 ProjectCard.args = {

@@ -60,8 +60,7 @@ const CardButton = styled.a`
   }
 `;
 
-const Project = ({ project, onClick }: ProjectProps): JSX.Element => {
-  return (
+const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
     <Card>
       <div className="author">
         <img
@@ -94,6 +93,5 @@ const Project = ({ project, onClick }: ProjectProps): JSX.Element => {
       </div>
     </Card>
   );
-};
 
 export default Project;

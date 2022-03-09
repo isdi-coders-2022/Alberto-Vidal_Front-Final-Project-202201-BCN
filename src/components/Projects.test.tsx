@@ -27,9 +27,7 @@ describe("Given a Projects component", () => {
 
       render(<Projects projects={projects} />);
       const renderedProjects = screen.getAllByRole("listitem");
-      const authorsNames = authors.map((author) => {
-        return screen.getByText(authors[0]);
-      });
+      const authorsNames = authors.map((author) => screen.getByText(authors[0]));
 
       authorsNames.forEach((name) => {
         expect(name).toBeInTheDocument();
