@@ -33,14 +33,16 @@ const Card = styled.li`
       margin-left: 14px;
       border-radius: 50%;
       object-fit: cover;
-      &::before {
-        height: 221px;
-        width: 416px;
-      }
     }
   }
   & .preview {
     object-fit: cover;
+    &::before {
+      display: block;
+      padding: 10px;
+      height: 221px;
+      width: 416px;
+    }
   }
 
   & .buttons {
