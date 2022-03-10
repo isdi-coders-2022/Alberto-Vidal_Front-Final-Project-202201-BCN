@@ -1,42 +1,20 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Projects from "./components/Projects";
+import { RootState } from "./redux/store";
+import { loadProjectsThunk } from "./redux/thunks/projectThunks";
 
 const App = () => {
-  const props = [
-    {
-      id: "1",
-      author: {
-        name: "kiv",
-        avatar:
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-      },
-      preview:
-        "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
-    },
-    {
-      id: "2",
-      author: {
-        name: "kiv",
-        avatar:
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-      },
-      preview:
-        "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
-    },
-    {
-      id: "3",
-      author: {
-        name: "kiv",
-        avatar:
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-      },
-      preview:
-        "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
-    },
-  ];
+  const dispatch = useDispatch();
+  const projects = useSelector((state: RootState) => state.projects);
+  useEffect(() => {
+    dispatch(loadProjectsThunk());
+  }, [dispatch]);
+
   return (
     <>
       <h1>helloworld</h1>
-      <Projects projects={props} />
+      <Projects projects={projects} />
     </>
   );
 };
