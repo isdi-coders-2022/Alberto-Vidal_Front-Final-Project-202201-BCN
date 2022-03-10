@@ -11,7 +11,7 @@ export const loadProjectsThunk =
   async (
     dispatch: ThunkDispatch<RootState, void, TypeLoadProjectAction>
   ): Promise<void> => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}projects/all`);
+    const response = await fetch(`${process.env.VITE_API_URL}projects/all`);
 
     if (response.ok) {
       const { projects } = await response.json();
