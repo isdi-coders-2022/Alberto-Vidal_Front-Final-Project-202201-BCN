@@ -33,6 +33,10 @@ const Card = styled.li`
       margin-left: 14px;
       border-radius: 50%;
       object-fit: cover;
+      &::before {
+        height: 221px;
+        width: 416px;
+      }
     }
   }
   & .preview {
@@ -61,37 +65,33 @@ const CardButton = styled.a`
 `;
 
 const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
-    <Card>
-      <div className="author">
-        <img
-          className="author-image"
-          alt="author"
-          src={project.author.avatar}
-        />
-        <p className="author-name">{project.author.name}</p>
-      </div>
-      <img
-        className="preview"
-        width={416}
-        height={221}
-        alt="preview"
-        src={project.preview}
-      />
-      <div className="buttons">
-        <CardButton onClick={onClick} href="like" title="like">
-          <FavoriteBorder sx={{ fontSize: 40 }} />
-        </CardButton>
-        <CardButton onClick={onClick} href="comment" title="comment">
-          <ChatBubbleOutline sx={{ fontSize: 40 }} />
-        </CardButton>
-        <CardButton onClick={onClick} href="share" title="share">
-          <Share sx={{ fontSize: 40 }} />
-        </CardButton>
-        <CardButton onClick={onClick} href="bookmark" title="bookmark">
-          <BookmarkBorder sx={{ fontSize: 40 }} />
-        </CardButton>
-      </div>
-    </Card>
-  );
+  <Card>
+    <div className="author">
+      <img className="author-image" alt="author" src={project.author.avatar} />
+      <p className="author-name">{project.author.username}</p>
+    </div>
+    <img
+      className="preview"
+      width="416"
+      height="221"
+      alt={`${project.author.username} project preview`}
+      src={project.preview}
+    />
+    <div className="buttons">
+      <CardButton onClick={onClick} href="like" title="like">
+        <FavoriteBorder sx={{ fontSize: 40 }} />
+      </CardButton>
+      <CardButton onClick={onClick} href="comment" title="comment">
+        <ChatBubbleOutline sx={{ fontSize: 40 }} />
+      </CardButton>
+      <CardButton onClick={onClick} href="share" title="share">
+        <Share sx={{ fontSize: 40 }} />
+      </CardButton>
+      <CardButton onClick={onClick} href="bookmark" title="bookmark">
+        <BookmarkBorder sx={{ fontSize: 40 }} />
+      </CardButton>
+    </div>
+  </Card>
+);
 
 export default Project;

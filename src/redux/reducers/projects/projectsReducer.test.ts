@@ -20,7 +20,7 @@ describe("Given a projects reducer", () => {
         {
           id: "1",
           author: {
-            name: "kiv",
+            username: "kiv",
             avatar:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
           },
@@ -30,7 +30,7 @@ describe("Given a projects reducer", () => {
         {
           id: "2",
           author: {
-            name: "kiv",
+            username: "kiv",
             avatar:
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
           },

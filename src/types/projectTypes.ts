@@ -7,7 +7,7 @@ export interface ProjectProps {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
 }
 export interface ProjectShape {
-  author: { name: string; avatar: string };
+  author: { username: string; avatar: string };
   preview: string;
   id: string;
 }
