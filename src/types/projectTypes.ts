@@ -7,7 +7,23 @@ export interface ProjectProps {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
 }
 export interface ProjectShape {
-  author: { name: string; avatar: string };
+  author: { username: string; avatar: string };
   preview: string;
+  id: string;
+}
+
+export interface ProjectsResponse {
+  projects: ProjectResponse[];
+}
+export interface ProjectResponse {
+  author: {
+    username: string;
+    avatar: string;
+    id: string;
+  };
+  likes: number;
+  preview: string;
+  repo: string;
+  production: string;
   id: string;
 }

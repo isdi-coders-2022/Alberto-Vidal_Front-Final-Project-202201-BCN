@@ -9,7 +9,7 @@ describe("Given a project component", () => {
       const props = {
         id: "1",
         author: {
-          name: "kiv",
+          username: "kiv",
           avatar: "avatar",
         },
         preview: "preview",
@@ -36,7 +36,7 @@ describe("Given a project component", () => {
       const props = {
         id: "1",
         author: {
-          name: "kiv",
+          username: "kiv",
           avatar: "avatar",
         },
         preview: "preview",

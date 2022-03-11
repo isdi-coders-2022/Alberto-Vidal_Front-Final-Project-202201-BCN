@@ -9,7 +9,7 @@ describe("Given a Projects component", () => {
         {
           id: "1",
           author: {
-            name: authors[0],
+            username: authors[0],
             avatar: "avatar",
           },
           preview: "preview",
@@ -17,7 +17,7 @@ describe("Given a Projects component", () => {
         {
           id: "2",
           author: {
-            name: authors[1],
+            username: authors[1],
             avatar: "avatar",
           },
           preview: "preview",
@@ -27,7 +27,9 @@ describe("Given a Projects component", () => {
 
       render(<Projects projects={projects} />);
       const renderedProjects = screen.getAllByRole("listitem");
-      const authorsNames = authors.map((author) => screen.getByText(authors[0]));
+      const authorsNames = authors.map((author) =>
+        screen.getByText(authors[0])
+      );
 
       authorsNames.forEach((name) => {
         expect(name).toBeInTheDocument();
