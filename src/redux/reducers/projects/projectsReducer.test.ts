@@ -1,5 +1,8 @@
 import { ProjectShape } from "../../../types/projectTypes";
-import { loadProjectsActionCreator } from "../../actions/projects/projectActionCreators";
+import {
+  deleteProjectActionCreator,
+  loadProjectsActionCreator,
+} from "../../actions/projects/projectActionCreators";
 import projectsReducer from "./projectsReducer";
 
 describe("Given a projects reducer", () => {
@@ -39,6 +42,51 @@ describe("Given a projects reducer", () => {
         },
       ];
       const action = loadProjectsActionCreator(newProjects);
+
+      const newState = projectsReducer(actualProjects, action);
+
+      expect(newState).toEqual(newProjects);
+    });
+  });
+
+  describe("When it's called the current projects and an action with type delete project with a matching id", () => {
+    test("Then it should return a new state without the matching project", () => {
+      const id = "2";
+      const actualProjects = [
+        {
+          id: "1",
+          author: {
+            username: "kiv",
+            avatar:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+          },
+          preview:
+            "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+        },
+        {
+          id: "2",
+          author: {
+            username: "kiv",
+            avatar:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+          },
+          preview:
+            "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+        },
+      ];
+      const newProjects = [
+        {
+          id: "1",
+          author: {
+            username: "kiv",
+            avatar:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+          },
+          preview:
+            "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+        },
+      ];
+      const action = deleteProjectActionCreator(id);
 
       const newState = projectsReducer(actualProjects, action);
 
