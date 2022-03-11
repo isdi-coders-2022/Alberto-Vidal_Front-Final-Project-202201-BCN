@@ -3,6 +3,7 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import GroupsIcon from "@mui/icons-material/Groups";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { RootState } from "../redux/store";
 
 const Bar = styled.header`
@@ -37,15 +38,15 @@ const User = styled.img`
 `;
 
 const Navbar = (): JSX.Element => {
-  const author = useSelector((state: RootState) => state.projects[0]?.author);
+  const user = useSelector((state: RootState) => state.projects[0]?.author);
 
   return (
     <Bar>
       <Title>ProjectSnap</Title>
       <NavigationButtons>
-        <a href="/home" title="home">
+        <Link to="/">
           <HomeIcon sx={{ fontSize: 40 }} />
-        </a>
+        </Link>
         <a href="friends" title="friends">
           <GroupsIcon sx={{ fontSize: 40 }} />
         </a>
@@ -53,11 +54,7 @@ const Navbar = (): JSX.Element => {
           <CreateNewFolderIcon sx={{ fontSize: 40 }} />
         </a>
       </NavigationButtons>
-      <User
-        className="author-image"
-        alt={author?.username}
-        src={author?.avatar}
-      />
+      <User className="author-image" alt={user?.username} src={user?.avatar} />
     </Bar>
   );
 };
