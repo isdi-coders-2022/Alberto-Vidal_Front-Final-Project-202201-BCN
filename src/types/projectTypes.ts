@@ -16,14 +16,16 @@ export interface ProjectsResponse {
   projects: ProjectResponse[];
 }
 export interface ProjectResponse {
-  author: {
-    username: string;
-    avatar: string;
-    id: string;
-  };
+  author: Author;
   likes: number;
   preview: string;
   repo: string;
   production: string;
+  id: string;
+}
+
+export interface Author {
+  username: string;
+  avatar: string;
   id: string;
 }

@@ -5,6 +5,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./redux/store";
+import "@fontsource/sansita-swashed";
 
 ReactDOM.render(
   <React.StrictMode>

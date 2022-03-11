@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import { RootState } from "./redux/store";
 import { loadProjectsThunk } from "./redux/thunks/projectThunks";
@@ -13,7 +14,7 @@ const App = () => {
 
   return (
     <>
-      <h1>helloworld</h1>
+      <Navbar />
       <Projects projects={projects} />
     </>
   );
