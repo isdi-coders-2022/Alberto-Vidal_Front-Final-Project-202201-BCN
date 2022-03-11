@@ -13,6 +13,9 @@ const Bar = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & a {
+    color: inherit;
+  }
 `;
 const NavigationButtons = styled.nav`
   display: flex;
@@ -40,9 +43,15 @@ const Navbar = (): JSX.Element => {
     <Bar>
       <Title>ProjectSnap</Title>
       <NavigationButtons>
-        <HomeIcon sx={{ fontSize: 40 }} />
-        <GroupsIcon sx={{ fontSize: 40 }} />
-        <CreateNewFolderIcon sx={{ fontSize: 40 }} />
+        <a href="/home" title="home">
+          <HomeIcon sx={{ fontSize: 40 }} />
+        </a>
+        <a href="friends" title="friends">
+          <GroupsIcon sx={{ fontSize: 40 }} />
+        </a>
+        <a href="new project" title="new project">
+          <CreateNewFolderIcon sx={{ fontSize: 40 }} />
+        </a>
       </NavigationButtons>
       <User
         className="author-image"
