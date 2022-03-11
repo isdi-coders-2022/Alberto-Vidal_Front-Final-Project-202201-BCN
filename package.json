@@ -15,6 +15,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@fontsource/roboto": "^4.5.3",
     "@fontsource/sansita-swashed": "^4.5.3",
     "@mui/icons-material": "^5.5.0",
     "@mui/material": "^5.5.0",
@@ -24,6 +25,7 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.2",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
