@@ -1,5 +1,9 @@
 import { EmptyObject } from "redux";
-import { Action, TypeLoadProjectAction } from "../../../types/actionTypes";
+import {
+  Action,
+  TypeDeleteProjectAction,
+  TypeLoadProjectAction,
+} from "../../../types/actionTypes";
 import { ProjectShape } from "../../../types/projectTypes";
 import projectActionTypes from "../../actions/projects/projectActionTypes";
 
@@ -13,6 +17,13 @@ const projectsReducer = (
     case projectActionTypes.loadProjects:
       newProjects = (action as TypeLoadProjectAction).projects;
       break;
+
+    case projectActionTypes.deleteProject:
+      newProjects = projects.filter(
+        (project) => project.id !== (action as TypeDeleteProjectAction).id
+      );
+      break;
+
     default:
       newProjects = [...projects];
       break;
