@@ -1,5 +1,8 @@
 import { TypeLoadProjectAction } from "../../../types/actionTypes";
-import { loadProjectsActionCreator } from "./projectActionCreators";
+import {
+  deleteProjectActionCreator,
+  loadProjectsActionCreator,
+} from "./projectActionCreators";
 import projectActionTypes from "./projectActionTypes";
 
 describe("Given a load project action creator", () => {
@@ -33,6 +36,22 @@ describe("Given a load project action creator", () => {
       };
 
       const action = loadProjectsActionCreator(projects);
+
+      expect(action).toEqual(expectedAction);
+    });
+  });
+});
+
+describe("Given a deleteProjectActionCreator", () => {
+  describe("When it's called passing an id", () => {
+    test("Then it should return an object with type delete project and the id", () => {
+      const id = "astastasha3";
+      const expectedAction = {
+        id,
+        type: projectActionTypes.deleteProject,
+      };
+
+      const action = deleteProjectActionCreator(id);
 
       expect(action).toEqual(expectedAction);
     });

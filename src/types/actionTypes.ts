@@ -6,3 +6,7 @@ export interface Action {
 export interface TypeLoadProjectAction extends Action {
   projects: ProjectShape[];
 }
+
+export interface TypeDeleteProjectAction extends Action {
+  id: string;
+}
