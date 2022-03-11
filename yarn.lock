@@ -1405,6 +1405,11 @@
   resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-6.0.0-beta.0.tgz#8d772b0c37ebc450e3a95114be549e8fd245f16f"
   integrity sha512-7QdsX5ZqUEz87twuoKEJe7NHn6OHQsVYQpJcK0disnR0XuVb9FEgQUcsViard9OTNN/fG/nZT63V35vieOwZ4Q==
 
+"@fontsource/sansita-swashed@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@fontsource/sansita-swashed/-/sansita-swashed-4.5.3.tgz#71f4cccffd256c69350cad0de00999c928b20dc4"
+  integrity sha512-YcwGCe8EUekvsjzUi70HMmnVv32sF/FTPeProrZGO5EHa0Eb8gNvNxosqHH57K0QaHcthPrfB/YMhaUUHAIjqg==
+
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"

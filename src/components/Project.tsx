@@ -69,7 +69,11 @@ const CardButton = styled.a`
 const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
   <Card>
     <div className="author">
-      <img className="author-image" alt="author" src={project.author.avatar} />
+      <img
+        className="author-image"
+        alt={project.author.username}
+        src={project.author.avatar}
+      />
       <p className="author-name">{project.author.username}</p>
     </div>
     <img
