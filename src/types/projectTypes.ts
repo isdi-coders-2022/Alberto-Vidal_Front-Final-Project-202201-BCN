@@ -11,3 +11,19 @@ export interface ProjectShape {
   preview: string;
   id: string;
 }
+
+export interface ProjectsResponse {
+  projects: ProjectResponse[];
+}
+export interface ProjectResponse {
+  author: {
+    username: string;
+    avatar: string;
+    id: string;
+  };
+  likes: number;
+  preview: string;
+  repo: string;
+  production: string;
+  id: string;
+}
