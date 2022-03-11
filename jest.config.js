@@ -9,5 +9,6 @@ module.exports = {
     "!./src/**/main.tsx",
     "!src/stories/**",
     "!src/**/vite-env.d.ts",
+    "!src/mocks/**",
   ],
 };

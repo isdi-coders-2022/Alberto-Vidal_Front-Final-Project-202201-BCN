@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Projects from "./components/Projects";
-import { RootState } from "./redux/store";
+import Home from "./pages/Home";
 import { loadProjectsThunk } from "./redux/thunks/projectThunks";
 
 const App = () => {
   const dispatch = useDispatch();
-  const projects = useSelector((state: RootState) => state.projects);
   useEffect(() => {
     dispatch(loadProjectsThunk());
   }, [dispatch]);
@@ -15,7 +14,9 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Projects projects={projects} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </>
   );
 };

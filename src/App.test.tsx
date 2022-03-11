@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import store from "./redux/store";
 
@@ -9,9 +10,11 @@ describe("Given a App component", () => {
       const expectedLenght = 5;
 
       render(
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </BrowserRouter>
       );
 
       await waitFor(() => {

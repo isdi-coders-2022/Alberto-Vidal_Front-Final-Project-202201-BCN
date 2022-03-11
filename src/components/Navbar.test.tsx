@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import store from "../redux/store";
 import Navbar from "./Navbar";
 
@@ -9,9 +10,11 @@ describe("Given a Navbar component", () => {
       const name = /projectsnap/i;
 
       render(
-        <Provider store={store}>
-          <Navbar />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Navbar />
+          </Provider>
+        </BrowserRouter>
       );
       const title = screen.getByRole("heading", { name });
 
@@ -23,9 +26,11 @@ describe("Given a Navbar component", () => {
     const names = [/home/i, /friends/i, /new project/i];
 
     render(
-      <Provider store={store}>
-        <Navbar />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <Navbar />
+        </Provider>
+      </BrowserRouter>
     );
     const links = names.map((name) => screen.getByRole("link", { name }));
 
