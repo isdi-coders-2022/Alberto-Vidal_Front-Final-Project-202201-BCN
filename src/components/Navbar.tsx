@@ -44,7 +44,7 @@ const Navbar = (): JSX.Element => {
     <Bar>
       <Title>ProjectSnap</Title>
       <NavigationButtons>
-        <Link to="/">
+        <Link to="/" title="home">
           <HomeIcon sx={{ fontSize: 40 }} />
         </Link>
         <a href="friends" title="friends">
