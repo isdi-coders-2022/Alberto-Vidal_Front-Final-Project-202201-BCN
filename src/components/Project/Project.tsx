@@ -4,8 +4,9 @@ import {
   ChatBubbleOutline,
   Share,
   BookmarkBorder,
+  RemoveCircleOutline,
 } from "@mui/icons-material";
-import { ProjectProps } from "../types/projectTypes";
+import { ProjectProps } from "../../types/projectTypes";
 
 const Card = styled.li`
   margin: 10px;
@@ -66,7 +67,18 @@ const CardButton = styled.a`
   }
 `;
 
-const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
+const DeleteButton = styled.a`
+  color: inherit;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+`;
+
+const Project = ({
+  project,
+  onClick,
+  deleteAction,
+}: ProjectProps): JSX.Element => (
   <Card>
     <div className="author">
       <img
@@ -76,6 +88,14 @@ const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
       />
       <p className="author-name">{project.author.username}</p>
     </div>
+    <DeleteButton
+      onClick={deleteAction}
+      className="dlete-button"
+      href="delete"
+      title="delete"
+    >
+      <RemoveCircleOutline sx={{ fontSize: 40 }} />
+    </DeleteButton>
     <img
       className="preview"
       width="416"

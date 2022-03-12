@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Project from "../components/Project";
+import Project from "../components/Project/Project";
 import { ProjectProps } from "../types/projectTypes";
 
 export default {

@@ -30,9 +30,12 @@ export const deleteProjectThunk =
   async (
     dispatch: ThunkDispatch<RootState, void, TypeDeleteProjectAction>
   ): Promise<void> => {
-    const response = await fetch(`${process.env.VITE_API_URL}delete/${id}`, {
-      method: "delete",
-    });
+    const response = await fetch(
+      `${process.env.VITE_API_URL}projects/delete/${id}`,
+      {
+        method: "delete",
+      }
+    );
 
     if (response.ok) {
       dispatch(deleteProjectActionCreator(id));

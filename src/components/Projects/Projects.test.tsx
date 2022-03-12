@@ -1,4 +1,6 @@
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "../../redux/store";
 import Projects from "./Projects";
 
 describe("Given a Projects component", () => {
@@ -25,7 +27,11 @@ describe("Given a Projects component", () => {
       ];
       const expectedNumberOfProjects = projects.length;
 
-      render(<Projects projects={projects} />);
+      render(
+        <Provider store={store}>
+          <Projects projects={projects} />
+        </Provider>
+      );
       const renderedProjects = screen.getAllByRole("listitem");
       const authorsNames = authors.map((author) =>
         screen.getByText(authors[0])

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Projects from "../components/Projects";
+import Projects from "../components/Projects/Projects";
 import { RootState } from "../redux/store";
 
 const Home = () => {

@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import { DefaultRequestBody, rest } from "msw";
-import { ProjectShape } from "../types/projectTypes";
 import { generateRandomProjects } from "./projects";
 
 const projects = generateRandomProjects(5);
@@ -18,7 +17,7 @@ export const handlers = [
   ),
 
   rest.delete<DefaultRequestBody>(
-    `https://apiurlapiurl.com/delete/asdasd`,
+    `https://apiurlapiurl.com/projects/delete/asdasd`,
     (req, res, ctx) => res(ctx.status(200), ctx.json({}))
   ),
 ];
