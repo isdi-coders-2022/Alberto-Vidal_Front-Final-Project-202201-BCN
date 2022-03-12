@@ -17,7 +17,7 @@ export const handlers = [
   ),
 
   rest.delete<DefaultRequestBody>(
-    `https://apiurlapiurl.com/delete/asdasd`,
+    `https://apiurlapiurl.com/projects/delete/asdasd`,
     (req, res, ctx) => res(ctx.status(200), ctx.json({}))
   ),
 ];

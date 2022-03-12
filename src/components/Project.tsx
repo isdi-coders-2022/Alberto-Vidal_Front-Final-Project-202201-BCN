@@ -74,7 +74,11 @@ const DeleteButton = styled.a`
   right: 15px;
 `;
 
-const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
+const Project = ({
+  project,
+  onClick,
+  deleteAction,
+}: ProjectProps): JSX.Element => (
   <Card>
     <div className="author">
       <img
@@ -84,7 +88,12 @@ const Project = ({ project, onClick }: ProjectProps): JSX.Element => (
       />
       <p className="author-name">{project.author.username}</p>
     </div>
-    <DeleteButton className="dlete-button" href="delete" title="delete">
+    <DeleteButton
+      onClick={deleteAction}
+      className="dlete-button"
+      href="delete"
+      title="delete"
+    >
       <RemoveCircleOutline sx={{ fontSize: 40 }} />
     </DeleteButton>
     <img

@@ -14,10 +14,11 @@ describe("Given a project component", () => {
         },
         preview: "preview",
       };
-      const onClick = jest.fn();
       const expectedNumberOfImages = 2;
 
-      render(<Project project={props} onClick={onClick} />);
+      render(
+        <Project project={props} onClick={jest.fn()} deleteAction={jest.fn()} />
+      );
       const images = screen.getAllByRole("img");
       const links = expectedLinkNames.map((linkName) =>
         screen.getByRole("link", { name: linkName })
@@ -43,7 +44,9 @@ describe("Given a project component", () => {
       };
       const onClick = jest.fn();
 
-      render(<Project project={props} onClick={onClick} />);
+      render(
+        <Project project={props} onClick={onClick} deleteAction={jest.fn()} />
+      );
       const like = screen.getByRole("link", { name: likeLink });
       userEvent.click(like);
 

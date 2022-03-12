@@ -2,9 +2,12 @@ export interface ProjectsProps {
   projects: ProjectShape[];
 }
 
+export type OnClick = (event: React.MouseEvent<HTMLElement>) => void;
+
 export interface ProjectProps {
   project: ProjectShape;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick: OnClick;
+  deleteAction: OnClick;
 }
 export interface ProjectShape {
   author: { username: string; avatar: string };
