@@ -1,3 +1,4 @@
+import { Details } from "@mui/icons-material";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Project from "./Project";
@@ -51,6 +52,29 @@ describe("Given a project component", () => {
       userEvent.click(like);
 
       expect(onClick).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it's rendered and clicked on the delete link", () => {
+    test("Then the action passed should be performed", () => {
+      const deleteLink = "delete";
+      const props = {
+        id: "1",
+        author: {
+          username: "kiv",
+          avatar: "avatar",
+        },
+        preview: "preview",
+      };
+      const onDelete = jest.fn();
+
+      render(
+        <Project project={props} onClick={jest.fn()} deleteAction={onDelete} />
+      );
+      const deleteClickable = screen.getByRole("link", { name: deleteLink });
+      userEvent.click(deleteClickable);
+
+      expect(onDelete).toHaveBeenCalled();
     });
   });
 });
