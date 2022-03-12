@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { deleteProjectThunk } from "../redux/thunks/projectThunks";
-import { ProjectsProps } from "../types/projectTypes";
-import Project from "./Project";
+import { deleteProjectThunk } from "../../redux/thunks/projectThunks";
+import { ProjectsProps } from "../../types/projectTypes";
+import Project from "../Project/Project";
 
 const ProjectsList = styled.ul`
   list-style: none;

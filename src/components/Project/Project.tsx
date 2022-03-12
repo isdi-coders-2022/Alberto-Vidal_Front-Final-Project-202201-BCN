@@ -6,7 +6,7 @@ import {
   BookmarkBorder,
   RemoveCircleOutline,
 } from "@mui/icons-material";
-import { ProjectProps } from "../types/projectTypes";
+import { ProjectProps } from "../../types/projectTypes";
 
 const Card = styled.li`
   margin: 10px;
