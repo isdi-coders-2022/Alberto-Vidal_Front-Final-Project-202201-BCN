@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const NewProjectForm = styled.form``;
 
-const NewProject = (): JSX.Element => {
+const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
   const blankForm = {
     preview: "",
     repo: "",
@@ -20,7 +20,7 @@ const NewProject = (): JSX.Element => {
 
   const onFormSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(newProject);
+    onSubmit();
   };
 
   const isFilled =
@@ -50,10 +50,14 @@ const NewProject = (): JSX.Element => {
         value={newProject.production}
       />
       <Button variant="contained" type="submit" disabled={!isFilled}>
-        Contained
+        Submit
       </Button>
     </NewProjectForm>
   );
 };
 
 export default NewProject;
+
+interface NewProjectProps {
+  onSubmit: () => void;
+}

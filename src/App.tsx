@@ -3,7 +3,6 @@ import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import NewProject from "./components/NewProject/NewProject";
 import Home from "./pages/Home";
 import { loadProjectsThunk } from "./redux/thunks/projectThunks";
 
