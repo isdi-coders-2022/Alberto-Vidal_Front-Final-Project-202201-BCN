@@ -24,6 +24,7 @@ const NavigationButtons = styled.nav`
   justify-content: space-between;
   height: 100%;
   width: 500px;
+  margin: 0 40px;
 `;
 const Title = styled.h1`
   font-family: "Sansita Swashed";
@@ -50,9 +51,9 @@ const Navbar = (): JSX.Element => {
         <a href="friends" title="friends">
           <GroupsIcon sx={{ fontSize: 40 }} />
         </a>
-        <a href="new project" title="new project">
+        <Link to="/new" title="new project">
           <CreateNewFolderIcon sx={{ fontSize: 40 }} />
-        </a>
+        </Link>
       </NavigationButtons>
       <User className="author-image" alt={user?.username} src={user?.avatar} />
     </Bar>
