@@ -21,8 +21,8 @@ describe("Given a NewProject Component", () => {
     });
   });
 
-  describe("When it's rendered and all the inputs filled and clicked on the submit button", () => {
-    test("Then the on submit button should be performed on click", () => {
+  describe("When it's rendered and all the inputs filled but with no valid url and clicked on the submit button", () => {
+    test("Then the the submit button sholud be disabled", () => {
       const onSubmit = jest.fn();
       const labels = [/repo/i, /production/i, /preview/i];
       const buttonName = /submit/i;
@@ -34,9 +34,27 @@ describe("Given a NewProject Component", () => {
       inputs.forEach((input) => {
         userEvent.type(input, text);
       });
-      userEvent.click(button);
 
-      expect(onSubmit).toHaveBeenCalled();
+      expect(button).toBeDisabled();
+    });
+  });
+
+  describe("When it's rendered and all the inputs filled but with valid url and clicked on the submit button", () => {
+    test("Then the the submit button sholud be disabled", () => {
+      const onSubmit = jest.fn();
+      const labels = [/repo/i, /production/i, /preview/i];
+      const buttonName = /submit/i;
+      const validUrl = "http://validurl.com";
+
+      render(<NewProject onSubmit={onSubmit} />);
+      const inputs = labels.map((label) => screen.getByLabelText(label));
+      const button = screen.getByRole("button", { name: buttonName });
+      inputs.forEach((input) => {
+        userEvent.type(input, validUrl);
+      });
+      // userEvent.click(button);
+
+      expect(button).not.toBeDisabled();
     });
   });
 });

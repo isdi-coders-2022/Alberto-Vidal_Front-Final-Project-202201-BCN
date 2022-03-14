@@ -5,7 +5,7 @@ import styled from "styled-components";
 const NewProjectForm = styled.form``;
 
 const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
-  const blankForm = {
+  const blankForm: NewProjectFormData = {
     preview: "",
     repo: "",
     production: "",
@@ -25,6 +25,12 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
 
   const isFilled =
     newProject.preview && newProject.production && newProject.repo;
+  const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/gi;
+
+  const isOk =
+    isFilled &&
+    isValidUrl.test(newProject.production) &&
+    isValidUrl.test(newProject.repo);
 
   return (
     <NewProjectForm onSubmit={onFormSubmit}>
@@ -49,7 +55,7 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
         onChange={onFormChange}
         value={newProject.production}
       />
-      <Button variant="contained" type="submit" disabled={!isFilled}>
+      <Button variant="contained" type="submit" disabled={!isOk}>
         Submit
       </Button>
     </NewProjectForm>
@@ -59,5 +65,11 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
 export default NewProject;
 
 interface NewProjectProps {
-  onSubmit: () => void;
+  onSubmit: (data: NewProjectFormData) => void;
+}
+
+export interface NewProjectFormData {
+  preview: string;
+  repo: string;
+  production: string;
 }
