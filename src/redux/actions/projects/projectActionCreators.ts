@@ -1,4 +1,6 @@
 import {
+  CreateProjectAction,
+  CreateProjectActionProps,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
@@ -17,4 +19,11 @@ export const deleteProjectActionCreator = (
 ): TypeDeleteProjectAction => ({
   id,
   type: projectActionTypes.deleteProject,
+});
+
+export const createProjectActionCreator = (
+  project: CreateProjectActionProps
+): CreateProjectAction => ({
+  type: projectActionTypes.createProject,
+  project,
 });
