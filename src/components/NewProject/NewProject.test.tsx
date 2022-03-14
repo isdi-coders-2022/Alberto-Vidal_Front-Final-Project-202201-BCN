@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
 import NewProject from "./NewProject";
 
 describe("Given a NewProject Component", () => {
@@ -21,8 +22,8 @@ describe("Given a NewProject Component", () => {
     });
   });
 
-  describe("When it's rendered and all the inputs filled but with no valid url and clicked on the submit button", () => {
-    test("Then the the submit button sholud be disabled", () => {
+  describe("When it's rendered and all the inputs filled but with no valid url", () => {
+    test("Then the the submit button sholud be enabled but the action on submit not performed", () => {
       const onSubmit = jest.fn();
       const labels = [/repo/i, /production/i, /preview/i];
       const buttonName = /submit/i;
@@ -35,7 +36,34 @@ describe("Given a NewProject Component", () => {
         userEvent.type(input, text);
       });
 
-      expect(button).toBeDisabled();
+      expect(button).not.toBeDisabled();
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("When it's rendered and repo and preview inputs are filled but with no valid url and clicked on the submit button", () => {
+    test("Then the texts 'production must be a valid URL' and 'repo must be a valid URL' should be rendered", async () => {
+      const onSubmit = jest.fn();
+      const labels = [/repo/i, /production/i, /preview/i];
+      const buttonName = /submit/i;
+      const textsToRender = [
+        /production must be a valid URL/i,
+        /repo must be a valid URL/i,
+      ];
+      const textTyped = "uastusaoeu";
+
+      render(<NewProject onSubmit={onSubmit} />);
+      const inputs = labels.map((label) => screen.getByLabelText(label));
+      inputs.forEach((input) => {
+        userEvent.type(input, textTyped);
+      });
+      const button = screen.getByRole("button", { name: buttonName });
+      userEvent.click(button);
+      const firstRenderedText = await screen.findByText(textsToRender[0]);
+      const secondRenderedText = await screen.findByText(textsToRender[1]);
+
+      expect(firstRenderedText).toBeInTheDocument();
+      expect(secondRenderedText).toBeInTheDocument();
     });
   });
 

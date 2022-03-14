@@ -3,7 +3,7 @@ import NewProject, {
 } from "../components/NewProject/NewProject";
 
 const CreateNewProject = (): JSX.Element => {
-  const onSubmit = (data: NewProjectFormData) => alert(JSON.stringify(data));
+  const onSubmit = (data: NewProjectFormData) => JSON.stringify(data);
   return <NewProject onSubmit={onSubmit} />;
 };
 

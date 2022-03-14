@@ -55,7 +55,7 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
     defaultValues: blankForm,
   });
 
-  const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/gi;
+  const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/g;
 
   return (
     <NewProjectForm onSubmit={handleSubmit(onSubmit)}>
