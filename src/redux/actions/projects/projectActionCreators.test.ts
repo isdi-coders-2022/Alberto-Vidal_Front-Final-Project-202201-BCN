@@ -1,5 +1,10 @@
-import { TypeLoadProjectAction } from "../../../types/actionTypes";
 import {
+  CreateProjectAction,
+  CreateProjectActionProps,
+  TypeLoadProjectAction,
+} from "../../../types/actionTypes";
+import {
+  createProjectActionCreator,
   deleteProjectActionCreator,
   loadProjectsActionCreator,
 } from "./projectActionCreators";
@@ -52,6 +57,27 @@ describe("Given a deleteProjectActionCreator", () => {
       };
 
       const action = deleteProjectActionCreator(id);
+
+      expect(action).toEqual(expectedAction);
+    });
+  });
+});
+
+describe("Given a createProject action creator", () => {
+  describe("When it's called passing a project", () => {
+    test("Then it should return an action with type create project and the project", () => {
+      const project: CreateProjectActionProps = {
+        author: "utho",
+        preview: "tnueantuh",
+        production: "nteahunt",
+        repo: "ntuahh",
+      };
+      const expectedAction: CreateProjectAction = {
+        project,
+        type: projectActionTypes.createProject,
+      };
+
+      const action = createProjectActionCreator(project);
 
       expect(action).toEqual(expectedAction);
     });
