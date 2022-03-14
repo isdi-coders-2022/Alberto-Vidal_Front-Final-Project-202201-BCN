@@ -1,8 +1,44 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 
-const NewProjectForm = styled.form``;
+const NewProjectForm = styled.form`
+  display: flex;
+  margin: 0 auto;
+  width: 400px;
+  height: 600px;
+  margin-top: 30px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  display: flex;
+  & .form-control {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    & .error-message {
+      color: #bf1650;
+      position: absolute;
+      top: 58px;
+
+      &::before {
+        display: inline;
+        content: "⚠ ";
+      }
+    }
+  }
+  & button {
+    align-self: flex-start;
+    &:active {
+      transition: 0.3s all;
+      transform: translateY(3px);
+      border: 1px solid transparent;
+      opacity: 0.8;
+    }
+  }
+`;
 
 const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
   const blankForm: NewProjectFormData = {
@@ -11,51 +47,58 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
     production: "",
   };
 
-  const [newProject, setNewProject] = useState(blankForm);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, dirtyFields },
+  } = useForm<NewProjectFormData>({
+    defaultValues: blankForm,
+  });
 
-  const onFormChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    event.preventDefault();
-    setNewProject({ ...newProject, [event.target.id]: event.target.value });
-  };
-
-  const onFormSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    onSubmit();
-  };
-
-  const isFilled =
-    newProject.preview && newProject.production && newProject.repo;
   const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/gi;
 
-  const isOk =
-    isFilled &&
-    isValidUrl.test(newProject.production) &&
-    isValidUrl.test(newProject.repo);
-
   return (
-    <NewProjectForm onSubmit={onFormSubmit}>
-      <TextField
-        variant="outlined"
-        label="preview"
-        id="preview"
-        onChange={onFormChange}
-        value={newProject.preview}
+    <NewProjectForm onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="preview"
+        control={control}
+        render={({ field }) => (
+          <TextField variant="outlined" {...field} label={field.name} />
+        )}
       />
-      <TextField
-        variant="outlined"
-        label="repo"
-        id="repo"
-        onChange={onFormChange}
-        value={newProject.repo}
-      />
-      <TextField
-        variant="outlined"
-        label="production"
-        id="production"
-        onChange={onFormChange}
-        value={newProject.production}
-      />
-      <Button variant="contained" type="submit" disabled={!isOk}>
+      <div className="form-control">
+        <Controller
+          name="repo"
+          control={control}
+          render={({ field }) => (
+            <TextField variant="outlined" {...field} label={field.name} />
+          )}
+          rules={{ pattern: isValidUrl }}
+        />
+        {errors.repo && errors.repo.type ? (
+          <p className="error-message">repo must be a valid URL</p>
+        ) : null}
+      </div>
+      <div className="form-control">
+        <Controller
+          name="production"
+          control={control}
+          render={({ field }) => (
+            <TextField variant="outlined" {...field} label={field.name} />
+          )}
+          rules={{ pattern: isValidUrl }}
+        />
+        {errors.production && errors.production.type ? (
+          <p className="error-message">production must be a valid URL</p>
+        ) : null}
+      </div>
+      <Button
+        variant="contained"
+        type="submit"
+        disabled={
+          !(dirtyFields.preview && dirtyFields.production && dirtyFields.repo)
+        }
+      >
         Submit
       </Button>
     </NewProjectForm>
