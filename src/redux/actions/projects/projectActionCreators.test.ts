@@ -2,7 +2,7 @@ import {
   CreateProjectAction,
   CreateProjectActionProps,
   TypeLoadProjectAction,
-} from "../../../types/actionTypes";
+} from "../../../types/projectTypes";
 import {
   createProjectActionCreator,
   deleteProjectActionCreator,

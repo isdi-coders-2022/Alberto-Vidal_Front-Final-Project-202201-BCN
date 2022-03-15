@@ -1,9 +1,9 @@
 import { Factory } from "fishery";
 import ObjectId from "bson-objectid";
 import { faker } from "@faker-js/faker";
-import { ProjectResponse, ProjectShape } from "../types/projectTypes";
+import { DBProject, ProjectCard } from "../types/projectTypes";
 
-const projectFactory = Factory.define<ProjectResponse>(() => ({
+const projectFactory = Factory.define<DBProject>(() => ({
   author: {
     username: faker.internet.userName(),
     avatar: faker.internet.avatar(),
@@ -16,7 +16,6 @@ const projectFactory = Factory.define<ProjectResponse>(() => ({
   id: ObjectId().toHexString(),
 }));
 
-export const generateRandomProject = (): ProjectResponse =>
-  projectFactory.build();
-export const generateRandomProjects = (total: number): ProjectShape[] =>
+export const generateRandomProject = (): DBProject => projectFactory.build();
+export const generateRandomProjects = (total: number): ProjectCard[] =>
   projectFactory.buildList(total);

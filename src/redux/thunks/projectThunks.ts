@@ -2,9 +2,10 @@
 
 import { ThunkDispatch } from "redux-thunk";
 import {
+  CreateProjectThunkProps,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
-} from "../../types/actionTypes";
+} from "../../types/projectTypes";
 import {
   deleteProjectActionCreator,
   loadProjectsActionCreator,
@@ -39,5 +40,22 @@ export const deleteProjectThunk =
 
     if (response.ok) {
       dispatch(deleteProjectActionCreator(id));
+    }
+  };
+
+export const createProjectThunk =
+  (project: CreateProjectThunkProps) =>
+  async (
+    dispatch: ThunkDispatch<RootState, void, TypeDeleteProjectAction>
+  ): Promise<void> => {
+    const response = await fetch(`${process.env.VITE_API_URL}projects/new`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    if(response.ok) {
+      const projectWithId:  = await response.json()
     }
   };

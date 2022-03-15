@@ -1,4 +1,4 @@
-import { ProjectShape } from "../../../types/projectTypes";
+import { ProjectCard } from "../../../types/projectTypes";
 import {
   deleteProjectActionCreator,
   loadProjectsActionCreator,
@@ -8,7 +8,7 @@ import projectsReducer from "./projectsReducer";
 describe("Given a projects reducer", () => {
   describe("When it's called with no action and no projects", () => {
     test("Then it should return a new state equal to an empty array", () => {
-      const expectedNewState: ProjectShape[] = [];
+      const expectedNewState: ProjectCard[] = [];
 
       const newState = projectsReducer();
 
@@ -18,7 +18,7 @@ describe("Given a projects reducer", () => {
 
   describe("When it's called the current projects and an action with type load projects with payload such as an array of 2 projects", () => {
     test("Then it should return a new state equal to the prjects in the action", () => {
-      const actualProjects: ProjectShape[] = [];
+      const actualProjects: ProjectCard[] = [];
       const newProjects = [
         {
           id: "1",

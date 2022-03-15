@@ -1,17 +1,17 @@
 import { EmptyObject } from "redux";
 import {
   Action,
+  ProjectCard,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
-} from "../../../types/actionTypes";
-import { ProjectShape } from "../../../types/projectTypes";
+} from "../../../types/projectTypes";
 import projectActionTypes from "../../actions/projects/projectActionTypes";
 
 const projectsReducer = (
-  projects: ProjectShape[] = [],
+  projects: ProjectCard[] = [],
   action: Action | EmptyObject = {}
-): ProjectShape[] => {
-  let newProjects: ProjectShape[];
+): ProjectCard[] => {
+  let newProjects: ProjectCard[];
 
   switch ((action as Action).type) {
     case projectActionTypes.loadProjects:

@@ -1,25 +1,25 @@
 export interface ProjectsProps {
-  projects: ProjectShape[];
+  projects: ProjectCard[];
 }
 
 export type OnClick = (event: React.MouseEvent<HTMLElement>) => void;
 
 export interface ProjectProps {
-  project: ProjectShape;
+  project: ProjectCard;
   onClick: OnClick;
   deleteAction: OnClick;
 }
-export interface ProjectShape {
+export interface ProjectCard {
   author: { username: string; avatar: string };
   preview: string;
   id: string;
 }
 
-export interface ProjectsResponse {
-  projects: ProjectResponse[];
+export interface DBProjects {
+  projects: DBProject[];
 }
-export interface ProjectResponse {
-  author: Author;
+export interface DBProject {
+  author: DBAuthor;
   likes: number;
   preview: string;
   repo: string;
@@ -27,8 +27,33 @@ export interface ProjectResponse {
   id: string;
 }
 
-export interface Author {
+export interface DBAuthor {
   username: string;
   avatar: string;
   id: string;
+}
+
+export interface Action {
+  type: string;
+}
+export interface TypeLoadProjectAction extends Action {
+  projects: ProjectCard[];
+}
+
+export interface TypeDeleteProjectAction extends Action {
+  id: string;
+}
+
+export interface CreateProjectActionProps extends CreateProjectThunkProps {
+  author: string;
+}
+
+export interface CreateProjectThunkProps {
+  preview: string;
+  repo: string;
+  production: string;
+}
+
+export interface CreateProjectAction extends Action {
+  project: CreateProjectActionProps;
 }

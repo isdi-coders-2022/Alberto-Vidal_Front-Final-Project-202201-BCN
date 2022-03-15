@@ -1,14 +1,14 @@
 import {
   CreateProjectAction,
   CreateProjectActionProps,
+  ProjectCard,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
-} from "../../../types/actionTypes";
-import { ProjectShape } from "../../../types/projectTypes";
+} from "../../../types/projectTypes";
 import projectActionTypes from "./projectActionTypes";
 
 export const loadProjectsActionCreator = (
-  projects: ProjectShape[]
+  projects: ProjectCard[]
 ): TypeLoadProjectAction => ({
   type: projectActionTypes.loadProjects,
   projects,
