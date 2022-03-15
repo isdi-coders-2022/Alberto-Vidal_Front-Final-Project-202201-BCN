@@ -22,7 +22,7 @@ const Form = styled.form`
   }
 `;
 
-const UserForm = ({ isLogin }: UserFormProps): JSX.Element => {
+const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
   const {
     control,
     handleSubmit,
@@ -30,7 +30,27 @@ const UserForm = ({ isLogin }: UserFormProps): JSX.Element => {
   } = useForm<LoginUserFormData | RegisterUserFormData>();
 
   return (
-    <Form onSubmit={handleSubmit((data) => data)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      {!isLogin && (
+        <>
+          <Controller
+            name="avatar"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField variant="outlined" {...field} label={field.name} />
+            )}
+          />
+          <Controller
+            name="name"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField variant="outlined" {...field} label={field.name} />
+            )}
+          />
+        </>
+      )}
       <Controller
         name="username"
         defaultValue=""
@@ -47,32 +67,22 @@ const UserForm = ({ isLogin }: UserFormProps): JSX.Element => {
           <TextField variant="outlined" {...field} label={field.name} />
         )}
       />
-      {!isLogin && (
-        <>
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField variant="outlined" {...field} label={field.name} />
-            )}
-          />
-          <Controller
-            name="avatar"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField variant="outlined" {...field} label={field.name} />
-            )}
-          />
-        </>
-      )}
+
       <Button
         variant="contained"
         type="submit"
-        disabled={!(dirtyFields.username && dirtyFields.password)}
+        disabled={
+          isLogin
+            ? !(dirtyFields.username && dirtyFields.password)
+            : !(
+                dirtyFields.username &&
+                dirtyFields.password &&
+                (dirtyFields as unknown as RegisterUserFormData).avatar &&
+                (dirtyFields as unknown as RegisterUserFormData).name
+              )
+        }
       >
-        Submit
+        {isLogin ? "log in" : "register"}
       </Button>
     </Form>
   );
@@ -93,5 +103,6 @@ interface RegisterUserFormData {
 }
 
 interface UserFormProps {
-  isLogin: boolean;
+  isLogin?: boolean;
+  onSubmit: (data: RegisterUserFormData | LoginUserFormData) => void;
 }
