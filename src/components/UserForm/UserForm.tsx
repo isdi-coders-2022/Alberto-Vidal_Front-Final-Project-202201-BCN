@@ -27,7 +27,7 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
     control,
     handleSubmit,
     formState: { dirtyFields },
-  } = useForm<LoginUserFormData | RegisterUserFormData>();
+  } = useForm<UserFormData>();
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -77,8 +77,8 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
             : !(
                 dirtyFields.username &&
                 dirtyFields.password &&
-                (dirtyFields as unknown as RegisterUserFormData).avatar &&
-                (dirtyFields as unknown as RegisterUserFormData).name
+                dirtyFields.avatar &&
+                dirtyFields.name
               )
         }
       >
@@ -89,20 +89,14 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
 };
 
 export default UserForm;
-
-interface LoginUserFormData {
+export interface UserFormData {
   username: string;
+  name?: string;
   password: string;
-}
-
-interface RegisterUserFormData {
-  username: string;
-  name: string;
-  password: string;
-  avatar: string;
+  avatar?: string;
 }
 
 interface UserFormProps {
   isLogin?: boolean;
-  onSubmit: (data: RegisterUserFormData | LoginUserFormData) => void;
+  onSubmit: (data: UserFormData) => void;
 }
