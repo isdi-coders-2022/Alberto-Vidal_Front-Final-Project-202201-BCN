@@ -90,12 +90,12 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
 
 export default UserForm;
 
-interface LoginUserFormData {
+export interface LoginUserFormData {
   username: string;
   password: string;
 }
 
-interface RegisterUserFormData {
+export interface RegisterUserFormData {
   username: string;
   name: string;
   password: string;
