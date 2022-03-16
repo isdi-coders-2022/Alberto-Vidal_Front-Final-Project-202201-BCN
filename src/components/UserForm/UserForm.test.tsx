@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import UserForm from "./UserForm";
 
 describe("Given a UserForm component", () => {
@@ -9,7 +10,11 @@ describe("Given a UserForm component", () => {
       const isLogin = true;
       const expectedFields = [/username/i, /password/i];
 
-      render(<UserForm isLogin={isLogin} onSubmit={onSubmit} />);
+      render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
       const fields = expectedFields.map((label) =>
         screen.getByLabelText(label)
       );
@@ -22,7 +27,11 @@ describe("Given a UserForm component", () => {
       const isLogin = true;
       const expectedNubmerOfFields = 2;
 
-      render(<UserForm isLogin={isLogin} onSubmit={onSubmit} />);
+      render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
       const fields = screen.getAllByRole("textbox");
 
       expect(fields).toHaveLength(expectedNubmerOfFields);
@@ -35,7 +44,11 @@ describe("Given a UserForm component", () => {
       const isLogin = false;
       const expectedFields = [/username/i, /password/i, /^name/i, /avatar/i];
 
-      render(<UserForm isLogin={isLogin} onSubmit={onSubmit} />);
+      render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
       const fields = expectedFields.map((label) =>
         screen.getByLabelText(label)
       );
@@ -51,7 +64,11 @@ describe("Given a UserForm component", () => {
       const buttonName = isLogin ? /log in/i : /register/i;
       const someText = "tueanhnu";
 
-      render(<UserForm isLogin={isLogin} onSubmit={onSubmit} />);
+      render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
       const fields = expectedFields.map((label) =>
         screen.getByLabelText(label)
       );
@@ -70,7 +87,11 @@ describe("Given a UserForm component", () => {
       const buttonName = isLogin ? /log in/i : /register/i;
       const someText = "tueanhnu";
 
-      render(<UserForm isLogin={isLogin} onSubmit={onSubmit} />);
+      render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
       const fields = expectedFields.map((label) =>
         screen.getByLabelText(label)
       );
@@ -89,7 +110,11 @@ describe("Given a UserForm component", () => {
       const buttonName = isLogin ? /log in/i : /register/i;
       const someText = "tueanhnu";
 
-      render(<UserForm isLogin={isLogin} onSubmit={onSubmit} />);
+      render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
       const fields = expectedFields.map((label) =>
         screen.getByLabelText(label)
       );

@@ -4,6 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import store from "./redux/store";
 
+const mockLocalStorage = { getItem: () => "uteahutnheutnhutnhe" };
+Object.defineProperty(window, "localStorage", { value: mockLocalStorage });
+
 describe("Given a App component", () => {
   describe("When it's rendered", () => {
     test("Then it should render all the projects in the database", async () => {

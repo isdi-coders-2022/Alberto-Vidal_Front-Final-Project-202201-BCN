@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import store from "../redux/store";
 import Register from "./Register";
 
@@ -11,7 +12,9 @@ describe("Given a login page component", () => {
 
       render(
         <Provider store={store}>
-          <Register />
+          <BrowserRouter>
+            <Register />
+          </BrowserRouter>
         </Provider>
       );
       const fields = expectedFields.map((label) =>
