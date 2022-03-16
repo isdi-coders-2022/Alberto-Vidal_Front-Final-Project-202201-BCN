@@ -1,12 +1,12 @@
-import { UserAction } from "../../../types/actionTypes";
+import { Action, LoadUserAction } from "../../../types/actionTypes";
 import { Author } from "../../../types/projectTypes";
 import userActionTypes from "./userActionTypes";
 
-export const loadUserActionCreator = (user: Author): UserAction => ({
+export const loadUserActionCreator = (user: Author): LoadUserAction => ({
   type: userActionTypes.loadUser,
   user,
 });
 
-export const unloadUserActionCreator = (): UserAction => ({
+export const unloadUserActionCreator = (): Action => ({
   type: userActionTypes.unloadUser,
 });
