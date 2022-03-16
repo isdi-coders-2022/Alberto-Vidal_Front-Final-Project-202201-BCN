@@ -7,7 +7,7 @@ import CreateNewProject from "./pages/CreateNewProject";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { loadProjectsThunk } from "./redux/thunks/projectThunks";
+import { loadProjectsThunk } from "./redux/thunks/project/projectThunks";
 
 const App = () => {
   const dispatch = useDispatch();

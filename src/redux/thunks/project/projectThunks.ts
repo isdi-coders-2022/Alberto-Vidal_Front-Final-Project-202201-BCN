@@ -4,12 +4,12 @@ import { ThunkDispatch } from "redux-thunk";
 import {
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
-} from "../../types/actionTypes";
+} from "../../../types/actionTypes";
 import {
   deleteProjectActionCreator,
   loadProjectsActionCreator,
-} from "../actions/projects/projectActionCreators";
-import { RootState } from "../store";
+} from "../../actions/projects/projectActionCreators";
+import { RootState } from "../../store";
 
 // eslint-disable-next-line import/prefer-default-export
 export const loadProjectsThunk =
