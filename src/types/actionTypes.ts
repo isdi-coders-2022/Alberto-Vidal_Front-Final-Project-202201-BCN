@@ -1,4 +1,4 @@
-import { ProjectShape } from "./projectTypes";
+import { Author, ProjectShape } from "./projectTypes";
 
 export interface Action {
   type: string;
@@ -20,4 +20,8 @@ export interface CreateProjectActionProps {
 
 export interface CreateProjectAction extends Action {
   project: CreateProjectActionProps;
+}
+
+export interface UserAction extends Action {
+  user: Author;
 }
