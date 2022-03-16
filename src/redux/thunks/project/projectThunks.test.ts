@@ -1,5 +1,8 @@
-import { deleteProjectActionCreator } from "../actions/projects/projectActionCreators";
-import { deleteProjectThunk, loadProjectsThunk } from "./projectThunks";
+import { deleteProjectActionCreator } from "../../actions/projects/projectActionCreators";
+import {
+  deleteProjectThunk,
+  loadProjectsThunk,
+} from "../project/projectThunks";
 
 describe("Given a load projects thunk", () => {
   describe("When it's called", () => {

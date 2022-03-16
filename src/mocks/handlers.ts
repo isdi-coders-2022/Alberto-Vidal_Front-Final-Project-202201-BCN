@@ -3,21 +3,27 @@ import { DefaultRequestBody, rest } from "msw";
 import { generateRandomProjects } from "./projects";
 
 const projects = generateRandomProjects(5);
+const url = "https://apiurlapiurl.com/";
 
 export const handlers = [
-  rest.get<DefaultRequestBody>(
-    `https://apiurlapiurl.com/projects/all`,
-    (req, res, ctx) =>
-      res(
-        ctx.status(200),
-        ctx.json({
-          projects,
-        })
-      )
+  rest.get<DefaultRequestBody>(`${url}projects/all`, (req, res, ctx) =>
+    res(
+      ctx.status(200),
+      ctx.json({
+        projects,
+      })
+    )
   ),
 
   rest.delete<DefaultRequestBody>(
-    `https://apiurlapiurl.com/projects/delete/asdasd`,
+    `${url}projects/delete/asdasd`,
     (req, res, ctx) => res(ctx.status(200), ctx.json({}))
+  ),
+
+  rest.post<DefaultRequestBody>(`${url}user/login`, (req, res, ctx) =>
+    res(ctx.status(200), ctx.json({ token: "utnaehutnehtn" }))
+  ),
+  rest.post<DefaultRequestBody>(`${url}user/register`, (req, res, ctx) =>
+    res(ctx.status(200))
   ),
 ];

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { deleteProjectThunk } from "../../redux/thunks/projectThunks";
+import { deleteProjectThunk } from "../../redux/thunks/project/projectThunks";
 import { ProjectsProps } from "../../types/projectTypes";
 import Project from "../Project/Project";
 
