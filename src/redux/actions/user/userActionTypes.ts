@@ -1,6 +1,6 @@
 const userActionTypes = {
-  loginUser: "login-user",
-  registerUser: "register-user",
+  loadUser: "load-user",
+  unloadUser: "unload-user",
 };
 
 export default userActionTypes;

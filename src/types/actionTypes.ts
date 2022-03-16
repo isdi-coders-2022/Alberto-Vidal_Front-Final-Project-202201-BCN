@@ -23,5 +23,5 @@ export interface CreateProjectAction extends Action {
 }
 
 export interface UserAction extends Action {
-  user: Author;
+  user?: Author;
 }
