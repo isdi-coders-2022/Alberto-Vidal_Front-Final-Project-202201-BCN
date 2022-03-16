@@ -22,6 +22,6 @@ export interface CreateProjectAction extends Action {
   project: CreateProjectActionProps;
 }
 
-export interface UserAction extends Action {
+export interface LoadUserAction extends Action {
   user: Author;
 }

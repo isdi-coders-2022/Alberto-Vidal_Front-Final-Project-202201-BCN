@@ -1,43 +1,37 @@
 import {
-  loginUserActionCreator,
-  registerUserActionCreator,
+  loadUserActionCreator,
+  unloadUserActionCreator,
 } from "./userActionCreators";
 import userActionTypes from "./userActionTypes";
 
-describe("Given a loginUserActionCreator", () => {
+describe("Given a loadUserActionCreator", () => {
   describe("When it's called with a user", () => {
-    test("Then it should return an object with type loginUser", () => {
+    test("Then it should return an object with type loaduser and the user", () => {
       const user = {
         username: "paco",
         id: "utnaehutnshu",
         avatar: "image.png",
       };
       const expectedAciton = {
-        type: userActionTypes.loginUser,
+        type: userActionTypes.loadUser,
         user,
       };
 
-      const action = loginUserActionCreator(user);
+      const action = loadUserActionCreator(user);
 
       expect(action).toEqual(expectedAciton);
     });
   });
 });
 
-describe("Given a register user action creator", () => {
+describe("Given a unload user action creator", () => {
   describe("When it's called with a user", () => {
-    test("Then it should return an object with type register user and the user", () => {
-      const user = {
-        username: "paco",
-        id: "utnaehutnshu",
-        avatar: "image.png",
-      };
+    test("Then it should return an object with type unload user", () => {
       const expectedAciton = {
-        type: userActionTypes.registerUser,
-        user,
+        type: userActionTypes.unloadUser,
       };
 
-      const action = registerUserActionCreator(user);
+      const action = unloadUserActionCreator();
 
       expect(action).toEqual(expectedAciton);
     });
