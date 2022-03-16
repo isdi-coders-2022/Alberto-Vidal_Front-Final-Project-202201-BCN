@@ -10,9 +10,8 @@ import {
 import { RootState } from "../../store";
 
 export const registerUserThunk =
-  (userData: User) =>
-  async (dispatch: ThunkDispatch<RootState, void, Action>): Promise<void> => {
-    const response = await fetch(`${process.env.VITE_API_URL}/user/register`, {
+  (userData: User) => async (): Promise<void> => {
+    const response = await fetch(`${process.env.VITE_API_URL}user/register`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +26,7 @@ export const registerUserThunk =
 export const loginUserThunk =
   (userData: User) =>
   async (dispatch: ThunkDispatch<RootState, void, Action>): Promise<void> => {
-    const response = await fetch(`${process.env.VITE_API_URL}/user/login`, {
+    const response = await fetch(`${process.env.VITE_API_URL}user/login`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
