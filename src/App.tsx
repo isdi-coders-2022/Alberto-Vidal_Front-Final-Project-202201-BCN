@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import CreateNewProject from "./pages/CreateNewProject";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import { loadProjectsThunk } from "./redux/thunks/projectThunks";
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<CreateNewProject />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </ThemeProvider>
   );

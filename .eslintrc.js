@@ -23,6 +23,7 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
+    "react/require-default-props": [1, { ignoreFunctionalComponents: true }],
     "react/jsx-filename-extension": [
       1,
       {
