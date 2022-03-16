@@ -1,5 +1,5 @@
 import { EmptyObject } from "react-hook-form";
-import { LoadUserAction } from "../../../types/actionTypes";
+import { Action, LoadUserAction } from "../../../types/actionTypes";
 import { Author } from "../../../types/projectTypes";
 import userActionTypes from "../../actions/user/userActionTypes";
 
@@ -11,7 +11,7 @@ const defaultUser: Author = {
 
 const userReducer = (
   user: Author = defaultUser,
-  action: LoadUserAction | EmptyObject = {}
+  action: LoadUserAction | Action | EmptyObject = {}
 ): Author => {
   let newUser: Author;
 
