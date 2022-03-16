@@ -27,7 +27,12 @@ const App = () => {
   );
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) navigate("/login");
+    if (
+      !localStorage.getItem("token") &&
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    )
+      navigate("/login");
   }, [navigate]);
 
   return (
