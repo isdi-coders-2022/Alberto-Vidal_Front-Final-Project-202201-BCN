@@ -8,7 +8,7 @@ import { RootState } from "../../redux/store";
 
 const Bar = styled.header`
   padding: 0 20px;
-  width: 100vw;
+  width: 100%;
   height: 70px;
   background-color: #222;
   display: flex;
