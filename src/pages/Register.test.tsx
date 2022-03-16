@@ -1,4 +1,6 @@
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "../redux/store";
 import Register from "./Register";
 
 describe("Given a login page component", () => {
@@ -7,7 +9,11 @@ describe("Given a login page component", () => {
       const expectedFields = [/username/i, /password/i, /^name/i, /avatar/i];
       const expectedButton = /register/i;
 
-      render(<Register />);
+      render(
+        <Provider store={store}>
+          <Register />
+        </Provider>
+      );
       const fields = expectedFields.map((label) =>
         screen.getByLabelText(label)
       );
