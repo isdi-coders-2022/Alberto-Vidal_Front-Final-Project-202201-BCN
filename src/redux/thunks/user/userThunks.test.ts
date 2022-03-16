@@ -14,8 +14,9 @@ describe("Given a login user thunk", () => {
     test("Then it should call localStorage setitem and dispatch", async () => {
       const user = { username: "paco", password: "1234" };
       const dispatch = jest.fn();
+      const navigate = jest.fn();
 
-      const loginUser = loginUserThunk(user);
+      const loginUser = loginUserThunk(user, navigate);
       await loginUser(dispatch);
 
       expect(dispatch).toHaveBeenCalled();
@@ -33,7 +34,8 @@ describe("Given a register user thunk", () => {
         password: "1234",
         avatar: "image.png",
       };
-      const registerUser = registerUserThunk(user);
+      const navigate = jest.fn();
+      const registerUser = registerUserThunk(user, navigate);
 
       await registerUser();
     });

@@ -74,7 +74,12 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
         control={control}
         defaultValue=""
         render={({ field }) => (
-          <TextField variant="outlined" {...field} label={field.name} />
+          <TextField
+            type="password"
+            variant="outlined"
+            {...field}
+            label={field.name}
+          />
         )}
       />
 

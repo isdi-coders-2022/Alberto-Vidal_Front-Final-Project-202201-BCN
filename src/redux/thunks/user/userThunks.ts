@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { Navigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 import { ThunkDispatch } from "redux-thunk";
 import { Action } from "../../../types/actionTypes";
 import { Author } from "../../../types/projectTypes";
@@ -10,7 +10,7 @@ import {
 import { RootState } from "../../store";
 
 export const registerUserThunk =
-  (userData: User) => async (): Promise<void> => {
+  (userData: User, navigate: NavigateFunction) => async (): Promise<void> => {
     const response = await fetch(`${process.env.VITE_API_URL}user/register`, {
       method: "post",
       headers: {
@@ -20,11 +20,11 @@ export const registerUserThunk =
     });
 
     if (response.ok) {
-      Navigate({ to: "/login" });
+      navigate("/login");
     }
   };
 export const loginUserThunk =
-  (userData: User) =>
+  (userData: User, navigate: NavigateFunction) =>
   async (dispatch: ThunkDispatch<RootState, void, Action>): Promise<void> => {
     const response = await fetch(`${process.env.VITE_API_URL}user/login`, {
       method: "post",
@@ -39,7 +39,7 @@ export const loginUserThunk =
       const user: Author = jwtDecode(token);
       dispatch(loadUserActionCreator(user));
       localStorage.setItem("token", token);
-      Navigate({ to: "/" });
+      navigate("/");
     }
   };
 

@@ -25,16 +25,17 @@ describe("Given a UserForm component", () => {
     test("Then it should render only two fields", () => {
       const onSubmit = jest.fn();
       const isLogin = true;
-      const expectedNubmerOfFields = 2;
 
       render(
         <BrowserRouter>
           <UserForm isLogin={isLogin} onSubmit={onSubmit} />
         </BrowserRouter>
       );
-      const fields = screen.getAllByRole("textbox");
+      const fields = screen.getByRole("textbox");
+      const password = screen.getByLabelText("password");
 
-      expect(fields).toHaveLength(expectedNubmerOfFields);
+      expect(fields).toBeInTheDocument();
+      expect(password).toBeInTheDocument();
     });
   });
 
