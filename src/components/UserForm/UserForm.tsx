@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -12,6 +13,11 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: space-evenly;
   display: flex;
+`;
+
+const SubmitGroup = styled.div`
+  display: flex;
+  flex-direction: column;
   & button {
     align-self: flex-start;
     &:active {
@@ -19,6 +25,10 @@ const Form = styled.form`
       transform: translateY(3px);
       opacity: 0.8;
     }
+  }
+  & a {
+    color: inherit;
+    margin-bottom: 10px;
   }
 `;
 
@@ -68,22 +78,30 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
         )}
       />
 
-      <Button
-        variant="contained"
-        type="submit"
-        disabled={
-          isLogin
-            ? !(dirtyFields.username && dirtyFields.password)
-            : !(
-                dirtyFields.username &&
-                dirtyFields.password &&
-                dirtyFields.avatar &&
-                dirtyFields.name
-              )
-        }
-      >
-        {isLogin ? "log in" : "register"}
-      </Button>
+      <SubmitGroup>
+        {isLogin ? (
+          <Link to="/register">not registred?</Link>
+        ) : (
+          <Link to="/login">already registred?</Link>
+        )}
+
+        <Button
+          variant="contained"
+          type="submit"
+          disabled={
+            isLogin
+              ? !(dirtyFields.username && dirtyFields.password)
+              : !(
+                  dirtyFields.username &&
+                  dirtyFields.password &&
+                  dirtyFields.avatar &&
+                  dirtyFields.name
+                )
+          }
+        >
+          {isLogin ? "log in" : "register"}
+        </Button>
+      </SubmitGroup>
     </Form>
   );
 };
