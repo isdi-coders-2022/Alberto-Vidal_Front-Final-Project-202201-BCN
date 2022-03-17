@@ -1,6 +1,8 @@
 import jwtDecode from "jwt-decode";
 import { NavigateFunction } from "react-router-dom";
+import { toast } from "react-toastify";
 import { ThunkDispatch } from "redux-thunk";
+import { defaultToast, rejected, resolved } from "../../../toastConfigs";
 import { Action } from "../../../types/actionTypes";
 import { Author } from "../../../types/projectTypes";
 import {
@@ -11,6 +13,7 @@ import { RootState } from "../../store";
 
 export const registerUserThunk =
   (userData: User, navigate: NavigateFunction) => async (): Promise<void> => {
+    const notificationID = toast.loading("registering...", { ...defaultToast });
     const response = await fetch(`${process.env.VITE_API_URL}user/register`, {
       method: "post",
       headers: {
@@ -20,12 +23,23 @@ export const registerUserThunk =
     });
 
     if (response.ok) {
+      toast.update(notificationID, {
+        ...resolved,
+      });
+
       navigate("/login");
     }
+    toast.update(notificationID, {
+      ...rejected,
+    });
   };
 export const loginUserThunk =
   (userData: User, navigate: NavigateFunction) =>
   async (dispatch: ThunkDispatch<RootState, void, Action>): Promise<void> => {
+    const notificationID = toast.loading("login in...", {
+      ...defaultToast,
+    });
+
     const response = await fetch(`${process.env.VITE_API_URL}user/login`, {
       method: "post",
       headers: {
@@ -40,7 +54,14 @@ export const loginUserThunk =
       dispatch(loadUserActionCreator(user));
       localStorage.setItem("token", token);
       navigate("/");
+      toast.update(notificationID, {
+        ...resolved,
+      });
+      return;
     }
+    toast.update(notificationID, {
+      ...rejected,
+    });
   };
 
 export const unloadUserThunk =
