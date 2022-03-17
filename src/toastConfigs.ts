@@ -1,33 +1,38 @@
 import { ToastOptions, UpdateOptions } from "react-toastify";
 
+const updateDefaults: UpdateOptions = {
+  isLoading: false,
+  autoClose: 2000,
+  closeButton: true,
+  closeOnClick: true,
+};
+
 export const defaultToast: ToastOptions = {
   pauseOnFocusLoss: false,
   pauseOnHover: false,
+  closeButton: true,
+  closeOnClick: true,
 };
 
 export const resolved: UpdateOptions = {
   render: "🚀 loaded!",
   type: "success",
-  isLoading: false,
-  autoClose: 2000,
-  closeButton: true,
-  closeOnClick: true,
+  ...updateDefaults,
 };
 
 export const rejected: UpdateOptions = {
   render: "💩 error ",
   type: "error",
-  isLoading: false,
-  autoClose: 2000,
-  closeButton: true,
-  closeOnClick: true,
+  ...updateDefaults,
 };
 
 export const deleted: UpdateOptions = {
   render: "🗑 deleted",
   type: "info",
-  isLoading: false,
-  autoClose: 2000,
-  closeButton: true,
-  closeOnClick: true,
+  ...updateDefaults,
+};
+export const created: UpdateOptions = {
+  render: "🎉 created!",
+  type: "info",
+  ...updateDefaults,
 };
