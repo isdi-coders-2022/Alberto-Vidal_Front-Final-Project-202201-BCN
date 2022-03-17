@@ -19,7 +19,7 @@ export interface CreateProjectActionProps {
 }
 
 export interface CreateProjectAction extends Action {
-  project: CreateProjectActionProps;
+  project: ProjectShape;
 }
 
 export interface LoadUserAction extends Action {
