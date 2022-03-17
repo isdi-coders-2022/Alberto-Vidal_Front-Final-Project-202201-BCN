@@ -4,7 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import store from "./redux/store";
 
-const mockLocalStorage = { getItem: () => "uteahutnheutnhutnhe" };
+const mockLocalStorage = {
+  getItem: () =>
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGVwZSIsInVzZXJuYW1lIjoicGVwZSIsImlkIjoiNjIzMzFkZjQ3NDMzMGZiZDI4ZDU5NWUxIiwiaWF0IjoxNjQ3NTE3Mjg4fQ.suBLCba7CxFLfXRDudmvdL1uRzVFGAlnWxkOngW0i1A",
+};
 Object.defineProperty(window, "localStorage", { value: mockLocalStorage });
 
 describe("Given a App component", () => {
