@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import jwtDecode from "jwt-decode";
 import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar/Navbar";
@@ -10,14 +10,12 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { loadUserActionCreator } from "./redux/actions/user/userActionCreators";
-import { RootState } from "./redux/store";
 import { loadProjectsThunk } from "./redux/thunks/project/projectThunks";
 import { Author } from "./types/projectTypes";
 
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state);
   useEffect(() => {
     dispatch(loadProjectsThunk());
   }, [dispatch]);
