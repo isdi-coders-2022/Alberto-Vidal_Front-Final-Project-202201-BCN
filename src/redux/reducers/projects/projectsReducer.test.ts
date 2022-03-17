@@ -1,5 +1,6 @@
 import { ProjectShape } from "../../../types/projectTypes";
 import {
+  createProjectActionCreator,
   deleteProjectActionCreator,
   loadProjectsActionCreator,
 } from "../../actions/projects/projectActionCreators";
@@ -91,6 +92,50 @@ describe("Given a projects reducer", () => {
       const newState = projectsReducer(actualProjects, action);
 
       expect(newState).toEqual(newProjects);
+    });
+  });
+
+  describe("When it's called with the current projects and an action with type create and a project", () => {
+    test("Then it should return a new projects state with booth the previous projects and the new one", () => {
+      const actualProjects = [
+        {
+          id: "1",
+          author: {
+            username: "kiv",
+            avatar:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+          },
+          preview:
+            "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+        },
+        {
+          id: "2",
+          author: {
+            username: "kiv",
+            avatar:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+          },
+          preview:
+            "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+        },
+      ];
+      const newProject: ProjectShape = {
+        id: "3",
+        author: {
+          username: "jose",
+          avatar:
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+        },
+        preview:
+          "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+      };
+      const expectedProjects = [...actualProjects, newProject];
+
+      const action = createProjectActionCreator(newProject);
+
+      const newState = projectsReducer(actualProjects, action);
+
+      expect(newState).toEqual(expectedProjects);
     });
   });
 });

@@ -22,7 +22,7 @@ export const deleteProjectActionCreator = (
 });
 
 export const createProjectActionCreator = (
-  project: CreateProjectActionProps
+  project: ProjectShape
 ): CreateProjectAction => ({
   type: projectActionTypes.createProject,
   project,

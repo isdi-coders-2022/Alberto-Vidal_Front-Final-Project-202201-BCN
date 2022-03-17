@@ -3,6 +3,7 @@ import {
   CreateProjectActionProps,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
+import { ProjectShape } from "../../../types/projectTypes";
 import {
   createProjectActionCreator,
   deleteProjectActionCreator,
@@ -66,11 +67,15 @@ describe("Given a deleteProjectActionCreator", () => {
 describe("Given a createProject action creator", () => {
   describe("When it's called passing a project", () => {
     test("Then it should return an action with type create project and the project", () => {
-      const project: CreateProjectActionProps = {
-        author: "utho",
-        preview: "tnueantuh",
-        production: "nteahunt",
-        repo: "ntuahh",
+      const project: ProjectShape = {
+        id: "3",
+        author: {
+          username: "jose",
+          avatar:
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+        },
+        preview:
+          "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
       };
       const expectedAction: CreateProjectAction = {
         project,

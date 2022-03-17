@@ -6,7 +6,7 @@ export const defaultToast: ToastOptions = {
 };
 
 export const resolved: UpdateOptions = {
-  render: "success",
+  render: "🚀 loaded!",
   type: "success",
   isLoading: false,
   autoClose: 2000,
@@ -15,7 +15,7 @@ export const resolved: UpdateOptions = {
 };
 
 export const rejected: UpdateOptions = {
-  render: "error",
+  render: "💩 error ",
   type: "error",
   isLoading: false,
   autoClose: 2000,
@@ -24,7 +24,7 @@ export const rejected: UpdateOptions = {
 };
 
 export const deleted: UpdateOptions = {
-  render: "deleted 🗑",
+  render: "🗑 deleted",
   type: "info",
   isLoading: false,
   autoClose: 2000,
