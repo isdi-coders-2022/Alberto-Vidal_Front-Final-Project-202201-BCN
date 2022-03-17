@@ -39,7 +39,7 @@ const User = styled.img`
 `;
 
 const Navbar = (): JSX.Element => {
-  const user = useSelector((state: RootState) => state.projects[0]?.author);
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <Bar>
