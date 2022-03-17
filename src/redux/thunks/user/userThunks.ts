@@ -28,6 +28,7 @@ export const registerUserThunk =
       });
 
       navigate("/login");
+      return;
     }
     toast.update(notificationID, {
       ...rejected,
