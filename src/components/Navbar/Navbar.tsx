@@ -36,6 +36,7 @@ const User = styled.img`
   margin-left: 14px;
   border-radius: 50%;
   object-fit: cover;
+  opacity: ${(props: UserProps) => (props.visible ? 1 : 0)};
 `;
 
 const Navbar = (): JSX.Element => {
@@ -55,9 +56,19 @@ const Navbar = (): JSX.Element => {
           <CreateNewFolderIcon sx={{ fontSize: 40 }} />
         </Link>
       </NavigationButtons>
-      <User className="author-image" alt={user?.username} src={user?.avatar} />
+
+      <User
+        className="author-image"
+        alt={user?.username}
+        src={user?.avatar}
+        visible={!!user?.avatar}
+      />
     </Bar>
   );
 };
 
 export default Navbar;
+
+interface UserProps {
+  visible: boolean;
+}
