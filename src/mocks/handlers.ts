@@ -15,9 +15,8 @@ export const handlers = [
     )
   ),
 
-  rest.delete<DefaultRequestBody>(
-    `${url}projects/delete/asdasd`,
-    (req, res, ctx) => res(ctx.status(200), ctx.json({}))
+  rest.delete<DefaultRequestBody>(`${url}projects/delete/*`, (req, res, ctx) =>
+    res(ctx.status(200), ctx.json({}))
   ),
 
   rest.post<DefaultRequestBody>(`${url}user/login`, (req, res, ctx) =>

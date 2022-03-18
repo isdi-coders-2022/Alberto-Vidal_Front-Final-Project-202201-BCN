@@ -20,7 +20,6 @@ import {
   loadProjectsActionCreator,
 } from "../../actions/projects/projectActionCreators";
 import { RootState } from "../../store";
-import { ProjectShape } from "../../../types/projectTypes";
 
 export const loadProjectsThunk =
   () =>

@@ -1,4 +1,13 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  findAllByRole,
+  findByRole,
+  logRoles,
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
@@ -27,6 +36,25 @@ describe("Given a App component", () => {
         const projects = screen.getAllByRole("listitem");
         expect(projects).toHaveLength(expectedLenght);
       });
+    });
+  });
+
+  describe("When it's rendered and clicked on a card delete button", () => {
+    test("Then that card should disappear and a notification displayed", async () => {
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </BrowserRouter>
+      );
+      const cards = await screen.findAllByRole("listitem", { name: "project" });
+      const deleteButtons = screen.getAllByRole("link", { name: "delete" });
+      userEvent.click(deleteButtons[0]);
+      const toast = await screen.findByText(/deleted/i);
+
+      expect(cards[0]).not.toBeInTheDocument();
+      expect(toast).toBeInTheDocument();
     });
   });
 });
