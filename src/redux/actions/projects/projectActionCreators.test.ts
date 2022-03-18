@@ -1,11 +1,13 @@
 import {
   CreateProjectAction,
+  EditProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
 import { ProjectShape } from "../../../types/projectTypes";
 import {
   createProjectActionCreator,
   deleteProjectActionCreator,
+  editProjectActionCreator,
   loadProjectsActionCreator,
 } from "./projectActionCreators";
 import projectActionTypes from "./projectActionTypes";
@@ -82,6 +84,31 @@ describe("Given a createProject action creator", () => {
       };
 
       const action = createProjectActionCreator(project);
+
+      expect(action).toEqual(expectedAction);
+    });
+  });
+});
+
+describe("Given a editprojectActionCreator", () => {
+  describe("When it's called with a project", () => {
+    test("Then it should return an object with propecty type as edit project and the project", () => {
+      const project: ProjectShape = {
+        id: "3",
+        author: {
+          username: "jose",
+          avatar:
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+        },
+        preview:
+          "https://i.pinimg.com/474x/c0/68/bb/c068bb6bf2f3f07bca71fad7ed33966c.jpg",
+      };
+      const expectedAction: EditProjectAction = {
+        project,
+        type: projectActionTypes.editProject,
+      };
+
+      const action = editProjectActionCreator(project);
 
       expect(action).toEqual(expectedAction);
     });

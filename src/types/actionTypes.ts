@@ -22,6 +22,10 @@ export interface CreateProjectAction extends Action {
   project: ProjectShape;
 }
 
+export interface EditProjectAction extends Action {
+  project: ProjectShape;
+}
+
 export interface LoadUserAction extends Action {
   user: Author;
 }

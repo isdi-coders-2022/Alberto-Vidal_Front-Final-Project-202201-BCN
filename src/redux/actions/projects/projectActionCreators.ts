@@ -1,6 +1,6 @@
 import {
   CreateProjectAction,
-  CreateProjectActionProps,
+  EditProjectAction,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
@@ -25,5 +25,12 @@ export const createProjectActionCreator = (
   project: ProjectShape
 ): CreateProjectAction => ({
   type: projectActionTypes.createProject,
+  project,
+});
+
+export const editProjectActionCreator = (
+  project: ProjectShape
+): EditProjectAction => ({
+  type: projectActionTypes.editProject,
   project,
 });
