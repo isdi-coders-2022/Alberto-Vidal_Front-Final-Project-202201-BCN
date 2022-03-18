@@ -3,7 +3,8 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import GroupsIcon from "@mui/icons-material/Groups";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 import { RootState } from "../../redux/store";
 
 const Bar = styled.header`
@@ -16,6 +17,7 @@ const Bar = styled.header`
   justify-content: space-between;
   & a {
     color: inherit;
+    text-decoration: none;
   }
 `;
 const NavigationButtons = styled.nav`
@@ -41,10 +43,17 @@ const User = styled.img`
 
 const Navbar = (): JSX.Element => {
   const user = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
+  const goToHome = (event: React.MouseEvent<HTMLElement>): void => {
+    event.preventDefault();
+    navigate("/");
+  };
 
   return (
     <Bar>
-      <Title>ProjectSnap</Title>
+      <a href="/" onClick={goToHome}>
+        <Title>ProjectSnap</Title>
+      </a>
       <NavigationButtons>
         <Link to="/" title="home">
           <HomeIcon sx={{ fontSize: 40 }} />
