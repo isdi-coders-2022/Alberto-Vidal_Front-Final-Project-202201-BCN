@@ -1,16 +1,18 @@
 import { toast } from "react-toastify";
 import { ThunkDispatch } from "redux-thunk";
 import jwtDecode from "jwt-decode";
-import { NewProjectFormData } from "../../../components/NewProject/NewProject";
+import { ProjectFormData } from "../../../components/NewProject/ProjectForm";
 import {
   created,
   defaultToast,
   deleted,
   rejected,
   resolved,
+  updated,
 } from "../../../toastConfigs";
 import {
   CreateProjectAction,
+  EditProjectAction,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
@@ -63,8 +65,36 @@ export const deleteProjectThunk =
     toast.update(notificationID, { ...rejected });
   };
 
+export const editProjectThunk =
+  (projectData: ProjectFormData) =>
+  async (dispatch: ThunkDispatch<RootState, void, EditProjectAction>) => {
+    const notificationID = toast.loading("updating...", {
+      ...defaultToast,
+    });
+    const { id }: TokenContent = jwtDecode(
+      localStorage.getItem("token") as string
+    );
+
+    const response = await fetch(`${process.env.VITE_API_URL}projects/edit`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...projectData, author: id }),
+    });
+
+    if (response.ok) {
+      const createdProject = await response.json();
+      dispatch(createProjectActionCreator(createdProject));
+      toast.update(notificationID, { ...updated });
+      return;
+    }
+
+    toast.update(notificationID, { ...rejected });
+  };
+
 export const createProjectThunk =
-  (projectData: NewProjectFormData) =>
+  (projectData: ProjectFormData) =>
   async (dispatch: ThunkDispatch<RootState, void, CreateProjectAction>) => {
     const notificationID = toast.loading("deleting...", {
       ...defaultToast,

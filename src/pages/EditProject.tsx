@@ -2,14 +2,14 @@ import { useDispatch } from "react-redux";
 import NewProject, {
   ProjectFormData,
 } from "../components/NewProject/ProjectForm";
-import { createProjectThunk } from "../redux/thunks/project/projectThunks";
+import { editProjectThunk } from "../redux/thunks/project/projectThunks";
 
-const CreateNewProject = (): JSX.Element => {
+const EditProject = (): JSX.Element => {
   const dispatch = useDispatch();
   const onSubmit = (data: ProjectFormData) => {
-    dispatch(createProjectThunk(data));
+    dispatch(editProjectThunk(data));
   };
   return <NewProject onSubmit={onSubmit} />;
 };
 
-export default CreateNewProject;
+export default EditProject;

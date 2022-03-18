@@ -41,7 +41,7 @@ const NewProjectForm = styled.form`
 `;
 
 const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
-  const blankForm: NewProjectFormData = {
+  const blankForm: ProjectFormData = {
     preview: "",
     repo: "",
     production: "",
@@ -51,7 +51,7 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
     control,
     handleSubmit,
     formState: { errors, dirtyFields },
-  } = useForm<NewProjectFormData>({
+  } = useForm<ProjectFormData>({
     defaultValues: blankForm,
   });
 
@@ -108,10 +108,10 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
 export default NewProject;
 
 interface NewProjectProps {
-  onSubmit: (data: NewProjectFormData) => void;
+  onSubmit: (data: ProjectFormData) => void;
 }
 
-export interface NewProjectFormData {
+export interface ProjectFormData {
   preview: string;
   repo: string;
   production: string;
