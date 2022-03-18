@@ -2,6 +2,7 @@ import { EmptyObject } from "redux";
 import {
   Action,
   CreateProjectAction,
+  EditProjectAction,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
@@ -27,6 +28,14 @@ const projectsReducer = (
 
     case projectActionTypes.createProject:
       newProjects = [...projects, (action as CreateProjectAction).project];
+      break;
+
+    case projectActionTypes.editProject:
+      newProjects = projects.map((project) =>
+        project.id === (action as EditProjectAction).project.id
+          ? (action as EditProjectAction).project
+          : project
+      );
       break;
 
     default:
