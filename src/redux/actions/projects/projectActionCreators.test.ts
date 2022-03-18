@@ -1,6 +1,5 @@
 import {
   CreateProjectAction,
-  CreateProjectActionProps,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
 import { ProjectShape } from "../../../types/projectTypes";

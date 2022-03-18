@@ -84,8 +84,8 @@ export const createProjectThunk =
 
     if (response.ok) {
       const createdProject = await response.json();
-      toast.update(notificationID, { ...created });
       dispatch(createProjectActionCreator(createdProject));
+      toast.update(notificationID, { ...created });
       return;
     }
 

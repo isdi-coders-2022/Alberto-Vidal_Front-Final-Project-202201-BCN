@@ -42,7 +42,7 @@ const App = () => {
       return;
     }
     if (token) {
-      const userToLoad: Author = jwtDecode(token as string);
+      const userToLoad: Author = jwtDecode(token);
       dispatch(loadUserActionCreator(userToLoad));
     }
   }, [dispatch, navigate]);
