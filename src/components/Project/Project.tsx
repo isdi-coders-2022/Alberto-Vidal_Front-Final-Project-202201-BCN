@@ -83,10 +83,10 @@ const Project = ({
     <div className="author">
       <img
         className="author-image"
-        alt={project.author?.username}
-        src={project.author?.avatar}
+        alt={project.author.username}
+        src={project.author.avatar}
       />
-      <p className="author-name">{project.author?.username}</p>
+      <p className="author-name">{project.author.username}</p>
     </div>
     <DeleteButton
       onClick={deleteAction}
