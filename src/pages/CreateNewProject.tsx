@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import NewProject, {
   ProjectFormData,
-} from "../components/NewProject/ProjectForm";
+} from "../components/ProjectForm/ProjectForm";
 import { createProjectThunk } from "../redux/thunks/project/projectThunks";
 
 const CreateNewProject = (): JSX.Element => {

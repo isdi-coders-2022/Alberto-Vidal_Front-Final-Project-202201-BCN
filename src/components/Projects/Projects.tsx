@@ -38,9 +38,9 @@ const ProjectsList = styled.ul`
 const Projects = ({ projects }: ProjectsProps): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onClick = (event: React.MouseEvent<HTMLElement>) => {
+  const onClick = (id: string) => (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    navigate("/edit");
+    navigate(`/edit/${id}`);
   };
   const onDelete = (id: string) => (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -51,7 +51,7 @@ const Projects = ({ projects }: ProjectsProps): JSX.Element => {
       {projects.map(
         (project): JSX.Element => (
           <Project
-            onClick={onClick}
+            onClick={onClick(project.id)}
             deleteAction={onDelete(project.id)}
             key={project.id}
             project={project}

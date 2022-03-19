@@ -6,14 +6,14 @@ import {
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
-import { ProjectShape } from "../../../types/projectTypes";
+import { ProjectResponse } from "../../../types/projectTypes";
 import projectActionTypes from "../../actions/projects/projectActionTypes";
 
 const projectsReducer = (
-  projects: ProjectShape[] = [],
+  projects: ProjectResponse[] = [],
   action: Action | EmptyObject = {}
-): ProjectShape[] => {
-  let newProjects: ProjectShape[];
+): ProjectResponse[] => {
+  let newProjects: ProjectResponse[];
 
   switch ((action as Action).type) {
     case projectActionTypes.loadProjects:

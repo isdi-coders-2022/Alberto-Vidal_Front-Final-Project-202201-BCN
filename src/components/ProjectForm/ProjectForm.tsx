@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -40,7 +40,7 @@ const NewProjectForm = styled.form`
   }
 `;
 
-const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
+const NewProject = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
   const blankForm: ProjectFormData = {
     preview: "",
     repo: "",
@@ -50,12 +50,24 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
   const {
     control,
     handleSubmit,
-    formState: { errors, dirtyFields },
+    formState: { errors },
+    setValue,
+    watch,
   } = useForm<ProjectFormData>({
     defaultValues: blankForm,
   });
 
+  useEffect(() => {
+    if (project) {
+      setValue("preview", project.preview);
+      setValue("repo", project.repo);
+      setValue("production", project.production);
+    }
+  }, [project, setValue]);
+
   const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/g;
+  const formInputs = watch();
+  const isEmpty = Object.values(formInputs).every((imput) => imput !== "");
 
   return (
     <NewProjectForm onSubmit={handleSubmit(onSubmit)}>
@@ -92,13 +104,7 @@ const NewProject = ({ onSubmit }: NewProjectProps): JSX.Element => {
           <p className="error-message">production must be a valid URL</p>
         ) : null}
       </div>
-      <Button
-        variant="contained"
-        type="submit"
-        disabled={
-          !(dirtyFields.preview && dirtyFields.production && dirtyFields.repo)
-        }
-      >
+      <Button variant="contained" type="submit" disabled={!isEmpty}>
         Submit
       </Button>
     </NewProjectForm>
@@ -109,6 +115,7 @@ export default NewProject;
 
 interface NewProjectProps {
   onSubmit: (data: ProjectFormData) => void;
+  project?: ProjectFormData;
 }
 
 export interface ProjectFormData {
