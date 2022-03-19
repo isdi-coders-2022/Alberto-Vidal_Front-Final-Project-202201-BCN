@@ -96,13 +96,15 @@ const Project = ({
     >
       <RemoveCircleOutline sx={{ fontSize: 40 }} />
     </DeleteButton>
-    <img
-      className="preview"
-      width="416"
-      height="221"
-      alt={`${project.author.username} project preview`}
-      src={project.preview}
-    />
+    <a onClick={onClick} href="edit">
+      <img
+        className="preview"
+        width="416"
+        height="221"
+        alt={`${project.author.username} project preview`}
+        src={project.preview}
+      />
+    </a>
     <div className="buttons">
       <CardButton onClick={onClick} href="like" title="like">
         <FavoriteBorder sx={{ fontSize: 40 }} />

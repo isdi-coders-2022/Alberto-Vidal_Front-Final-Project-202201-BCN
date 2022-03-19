@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import NewProject from "./NewProject";
+import NewProject from "./ProjectForm";
 
 describe("Given a NewProject Component", () => {
   describe("When it's rendered", () => {

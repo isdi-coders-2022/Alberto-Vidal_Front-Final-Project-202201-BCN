@@ -1,16 +1,19 @@
 import { toast } from "react-toastify";
 import { ThunkDispatch } from "redux-thunk";
 import jwtDecode from "jwt-decode";
-import { NewProjectFormData } from "../../../components/NewProject/NewProject";
+import { NavigateFunction } from "react-router-dom";
+import { ProjectFormData } from "../../../components/ProjectForm/ProjectForm";
 import {
   created,
   defaultToast,
   deleted,
   rejected,
   resolved,
+  updated,
 } from "../../../toastConfigs";
 import {
   CreateProjectAction,
+  EditProjectAction,
   TypeDeleteProjectAction,
   TypeLoadProjectAction,
 } from "../../../types/actionTypes";
@@ -20,6 +23,7 @@ import {
   loadProjectsActionCreator,
 } from "../../actions/projects/projectActionCreators";
 import { RootState } from "../../store";
+import { ProjectResponse } from "../../../types/projectTypes";
 
 export const loadProjectsThunk =
   () =>
@@ -63,8 +67,37 @@ export const deleteProjectThunk =
     toast.update(notificationID, { ...rejected });
   };
 
+export const editProjectThunk =
+  (
+    projectData: ProjectFormData,
+    projectToEdit: ProjectResponse,
+    navigate: NavigateFunction
+  ) =>
+  async (dispatch: ThunkDispatch<RootState, void, EditProjectAction>) => {
+    const notificationID = toast.loading("updating...", {
+      ...defaultToast,
+    });
+    const response = await fetch(`${process.env.VITE_API_URL}projects/edit`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...projectToEdit, ...projectData }),
+    });
+
+    if (response.ok) {
+      const createdProject = await response.json();
+      dispatch(createProjectActionCreator(createdProject));
+      navigate("/");
+      toast.update(notificationID, { ...updated });
+      return;
+    }
+
+    toast.update(notificationID, { ...rejected });
+  };
+
 export const createProjectThunk =
-  (projectData: NewProjectFormData) =>
+  (projectData: ProjectFormData) =>
   async (dispatch: ThunkDispatch<RootState, void, CreateProjectAction>) => {
     const notificationID = toast.loading("deleting...", {
       ...defaultToast,

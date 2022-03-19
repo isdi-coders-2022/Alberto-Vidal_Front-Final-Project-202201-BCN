@@ -1,10 +1,10 @@
-import { Author, ProjectShape } from "./projectTypes";
+import { Author, ProjectResponse } from "./projectTypes";
 
 export interface Action {
   type: string;
 }
 export interface TypeLoadProjectAction extends Action {
-  projects: ProjectShape[];
+  projects: ProjectResponse[];
 }
 
 export interface TypeDeleteProjectAction extends Action {
@@ -19,7 +19,11 @@ export interface CreateProjectActionProps {
 }
 
 export interface CreateProjectAction extends Action {
-  project: ProjectShape;
+  project: ProjectResponse;
+}
+
+export interface EditProjectAction extends Action {
+  project: ProjectResponse;
 }
 
 export interface LoadUserAction extends Action {

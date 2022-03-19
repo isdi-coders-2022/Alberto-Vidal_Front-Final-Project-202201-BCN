@@ -31,6 +31,11 @@ export const deleted: UpdateOptions = {
   type: "info",
   ...updateDefaults,
 };
+export const updated: UpdateOptions = {
+  render: "✨ updated",
+  type: "info",
+  ...updateDefaults,
+};
 export const created: UpdateOptions = {
   render: "🎉 created!",
   type: "info",

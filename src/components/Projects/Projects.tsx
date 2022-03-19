@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { deleteProjectThunk } from "../../redux/thunks/project/projectThunks";
 import { ProjectsProps } from "../../types/projectTypes";
@@ -36,8 +37,10 @@ const ProjectsList = styled.ul`
 
 const Projects = ({ projects }: ProjectsProps): JSX.Element => {
   const dispatch = useDispatch();
-  const onClick = (event: React.MouseEvent<HTMLElement>) => {
+  const navigate = useNavigate();
+  const onClick = (id: string) => (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+    navigate(`/edit/${id}`);
   };
   const onDelete = (id: string) => (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -48,7 +51,7 @@ const Projects = ({ projects }: ProjectsProps): JSX.Element => {
       {projects.map(
         (project): JSX.Element => (
           <Project
-            onClick={onClick}
+            onClick={onClick(project.id)}
             deleteAction={onDelete(project.id)}
             key={project.id}
             project={project}

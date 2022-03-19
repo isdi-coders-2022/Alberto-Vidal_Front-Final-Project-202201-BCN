@@ -6,6 +6,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar/Navbar";
 import CreateNewProject from "./pages/CreateNewProject";
+import EditProject from "./pages/EditProject";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/new" element={<CreateNewProject />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/edit/:id" element={<EditProject />} />
       </Routes>
       <ToastContainer
         position="top-right"

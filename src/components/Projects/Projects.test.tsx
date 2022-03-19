@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import store from "../../redux/store";
 import Projects from "./Projects";
 
@@ -28,9 +29,11 @@ describe("Given a Projects component", () => {
       const expectedNumberOfProjects = projects.length;
 
       render(
-        <Provider store={store}>
-          <Projects projects={projects} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Projects projects={projects} />
+          </Provider>
+        </BrowserRouter>
       );
       const renderedProjects = screen.getAllByRole("listitem");
       const authorsNames = authors.map((author) =>
