@@ -9,7 +9,7 @@ const CreateNewProject = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSubmit = (data: ProjectFormData) => {
-    dispatch(createProjectThunk(data, navigate));
+    dispatch(createProjectThunk({ ...data }, navigate));
   };
   return <NewProject onSubmit={onSubmit} />;
 };
