@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import NewProject from "./ProjectForm";
+import ProjectForm from "./ProjectForm";
 
 describe("Given a NewProject Component", () => {
   describe("When it's rendered", () => {
@@ -10,7 +10,7 @@ describe("Given a NewProject Component", () => {
       const labels = [/repo/i, /production/i, /preview/i];
       const buttonName = /submit/i;
 
-      render(<NewProject onSubmit={onSubmit} />);
+      render(<ProjectForm onSubmit={onSubmit} />);
       const inputs = labels.map((label) => screen.getByLabelText(label));
       const button = screen.getByRole("button", { name: buttonName });
 
@@ -29,7 +29,7 @@ describe("Given a NewProject Component", () => {
       const buttonName = /submit/i;
       const text = "uastusaoeu";
 
-      render(<NewProject onSubmit={onSubmit} />);
+      render(<ProjectForm onSubmit={onSubmit} />);
       const inputs = labels.map((label) => screen.getByLabelText(label));
       const button = screen.getByRole("button", { name: buttonName });
       inputs.forEach((input) => {
@@ -52,7 +52,7 @@ describe("Given a NewProject Component", () => {
       ];
       const textTyped = "uastusaoeu";
 
-      render(<NewProject onSubmit={onSubmit} />);
+      render(<ProjectForm onSubmit={onSubmit} />);
       const inputs = labels.map((label) => screen.getByLabelText(label));
       inputs.forEach((input) => {
         userEvent.type(input, textTyped);
@@ -74,7 +74,7 @@ describe("Given a NewProject Component", () => {
       const buttonName = /submit/i;
       const validUrl = "http://validurl.com";
 
-      render(<NewProject onSubmit={onSubmit} />);
+      render(<ProjectForm onSubmit={onSubmit} />);
       const inputs = labels.map((label) => screen.getByLabelText(label));
       const button = screen.getByRole("button", { name: buttonName });
       inputs.forEach((input) => {

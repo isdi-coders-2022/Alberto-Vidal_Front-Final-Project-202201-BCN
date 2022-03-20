@@ -161,6 +161,7 @@ export const createProjectThunk =
       const createdProject = await response.json();
       dispatch(createProjectActionCreator(createdProject));
       toast.update(notificationID, { ...created });
+      navigate("/");
       return;
     }
     if (

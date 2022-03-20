@@ -40,7 +40,7 @@ const NewProjectForm = styled.form`
   }
 `;
 
-const NewProject = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
+const ProjectForm = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
   const blankForm: ProjectFormData = {
     preview: "",
     repo: "",
@@ -50,7 +50,7 @@ const NewProject = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, submitCount },
     setValue,
     watch,
   } = useForm<ProjectFormData>({
@@ -67,7 +67,8 @@ const NewProject = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
 
   const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/g;
   const formInputs = watch();
-  const isEmpty = Object.values(formInputs).every((imput) => imput !== "");
+  const isFilled = Object.values(formInputs).every((imput) => imput !== "");
+  const isDisabled = !isFilled || submitCount === 1;
 
   return (
     <NewProjectForm onSubmit={handleSubmit(onSubmit)}>
@@ -104,14 +105,14 @@ const NewProject = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
           <p className="error-message">production must be a valid URL</p>
         ) : null}
       </div>
-      <Button variant="contained" type="submit" disabled={!isEmpty}>
+      <Button variant="contained" type="submit" disabled={isDisabled}>
         Submit
       </Button>
     </NewProjectForm>
   );
 };
 
-export default NewProject;
+export default ProjectForm;
 
 interface NewProjectProps {
   onSubmit: (data: ProjectFormData) => void;
