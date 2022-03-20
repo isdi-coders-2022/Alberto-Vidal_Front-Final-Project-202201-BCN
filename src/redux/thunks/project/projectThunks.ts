@@ -5,6 +5,7 @@ import { NavigateFunction } from "react-router-dom";
 import { ProjectFormData } from "../../../components/ProjectForm/ProjectForm";
 import {
   created,
+  credentials,
   defaultToast,
   deleted,
   rejected,
@@ -26,12 +27,16 @@ import { RootState } from "../../store";
 import { ProjectResponse } from "../../../types/projectTypes";
 
 export const loadProjectsThunk =
-  () =>
+  (navigate: NavigateFunction) =>
   async (
     dispatch: ThunkDispatch<RootState, void, TypeLoadProjectAction>
   ): Promise<void> => {
     const notificationID = toast.loading("loading...", { ...defaultToast });
-    const response = await fetch(`${process.env.VITE_API_URL}projects/all`);
+    const response = await fetch(`${process.env.VITE_API_URL}projects/all`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     if (response.ok) {
       const { projects } = await response.json();
@@ -41,11 +46,23 @@ export const loadProjectsThunk =
       });
       return;
     }
-    toast.update(notificationID, {});
+
+    if (
+      response.status === 403 &&
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    ) {
+      navigate("/login");
+      localStorage.removeItem("token");
+      toast.update(notificationID, credentials);
+      return;
+    }
+
+    toast.update(notificationID, rejected);
   };
 
 export const deleteProjectThunk =
-  (id: string) =>
+  (id: string, navigate: NavigateFunction) =>
   async (
     dispatch: ThunkDispatch<RootState, void, TypeDeleteProjectAction>
   ): Promise<void> => {
@@ -54,6 +71,9 @@ export const deleteProjectThunk =
     const response = await fetch(
       `${process.env.VITE_API_URL}projects/delete/${id}`,
       {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         method: "delete",
       }
     );
@@ -61,6 +81,16 @@ export const deleteProjectThunk =
     if (response.ok) {
       dispatch(deleteProjectActionCreator(id));
       toast.update(notificationID, { ...deleted });
+      return;
+    }
+    if (
+      response.status === 403 &&
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    ) {
+      navigate("/login");
+      localStorage.removeItem("token");
+      toast.update(notificationID, credentials);
       return;
     }
 
@@ -81,6 +111,7 @@ export const editProjectThunk =
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ ...projectToEdit, ...projectData }),
     });
@@ -92,12 +123,22 @@ export const editProjectThunk =
       toast.update(notificationID, { ...updated });
       return;
     }
+    if (
+      response.status === 403 &&
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    ) {
+      navigate("/login");
+      localStorage.removeItem("token");
+      toast.update(notificationID, credentials);
+      return;
+    }
 
     toast.update(notificationID, { ...rejected });
   };
 
 export const createProjectThunk =
-  (projectData: ProjectFormData) =>
+  (projectData: ProjectFormData, navigate: NavigateFunction) =>
   async (dispatch: ThunkDispatch<RootState, void, CreateProjectAction>) => {
     const notificationID = toast.loading("deleting...", {
       ...defaultToast,
@@ -111,6 +152,7 @@ export const createProjectThunk =
       method: "post",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ ...projectData, author: id }),
     });
@@ -119,6 +161,16 @@ export const createProjectThunk =
       const createdProject = await response.json();
       dispatch(createProjectActionCreator(createdProject));
       toast.update(notificationID, { ...created });
+      return;
+    }
+    if (
+      response.status === 403 &&
+      window.location.pathname !== "/register" &&
+      window.location.pathname !== "/login"
+    ) {
+      navigate("/login");
+      localStorage.removeItem("token");
+      toast.update(notificationID, credentials);
       return;
     }
 

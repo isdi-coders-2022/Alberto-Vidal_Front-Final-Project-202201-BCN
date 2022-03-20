@@ -7,20 +7,15 @@ import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar/Navbar";
 import CreateNewProject from "./pages/CreateNewProject";
 import EditProject from "./pages/EditProject";
-
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { loadUserActionCreator } from "./redux/actions/user/userActionCreators";
-import { loadProjectsThunk } from "./redux/thunks/project/projectThunks";
 import { Author } from "./types/projectTypes";
 
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    dispatch(loadProjectsThunk());
-  }, [dispatch]);
 
   const theme = useMemo(
     () =>
