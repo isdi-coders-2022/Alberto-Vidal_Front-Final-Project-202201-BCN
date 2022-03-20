@@ -71,6 +71,9 @@ export const deleteProjectThunk =
     const response = await fetch(
       `${process.env.VITE_API_URL}projects/delete/${id}`,
       {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         method: "delete",
       }
     );
@@ -108,6 +111,7 @@ export const editProjectThunk =
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ ...projectToEdit, ...projectData }),
     });
@@ -148,6 +152,7 @@ export const createProjectThunk =
       method: "post",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ ...projectData, author: id }),
     });
