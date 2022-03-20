@@ -53,6 +53,7 @@ export const loadProjectsThunk =
       window.location.pathname !== "/login"
     ) {
       navigate("/login");
+      localStorage.removeItem("token");
       toast.update(notificationID, credentials);
       return;
     }
@@ -85,6 +86,7 @@ export const deleteProjectThunk =
       window.location.pathname !== "/login"
     ) {
       navigate("/login");
+      localStorage.removeItem("token");
       toast.update(notificationID, credentials);
       return;
     }
@@ -123,6 +125,7 @@ export const editProjectThunk =
       window.location.pathname !== "/login"
     ) {
       navigate("/login");
+      localStorage.removeItem("token");
       toast.update(notificationID, credentials);
       return;
     }
@@ -161,6 +164,7 @@ export const createProjectThunk =
       window.location.pathname !== "/login"
     ) {
       navigate("/login");
+      localStorage.removeItem("token");
       toast.update(notificationID, credentials);
       return;
     }
