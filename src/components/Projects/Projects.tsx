@@ -44,7 +44,7 @@ const Projects = ({ projects }: ProjectsProps): JSX.Element => {
   };
   const onDelete = (id: string) => (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    dispatch(deleteProjectThunk(id));
+    dispatch(deleteProjectThunk(id, navigate));
   };
   return (
     <ProjectsList title="projects">

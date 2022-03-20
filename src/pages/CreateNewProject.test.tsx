@@ -19,9 +19,12 @@ const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
 describe("Given a Create New Project page", () => {
   describe("When it's rendered, filled all the fields in the form and click the submit button", () => {
     test("Then the function dispatch should be called", async () => {
+      const navigate = jest.fn();
       const mockDispatch = jest
         .fn()
-        .mockImplementationOnce((project) => createProjectThunk(project));
+        .mockImplementationOnce((project) =>
+          createProjectThunk(project, navigate)
+        );
       useDispatchMock.mockImplementationOnce(() => mockDispatch);
       const labels = [/repo/i, /production/i, /preview/i];
       const textToWrite = "http://something.com";

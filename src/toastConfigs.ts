@@ -41,3 +41,8 @@ export const created: UpdateOptions = {
   type: "info",
   ...updateDefaults,
 };
+export const credentials: UpdateOptions = {
+  render: "🚫 invalid credentials",
+  type: "info",
+  ...updateDefaults,
+};
