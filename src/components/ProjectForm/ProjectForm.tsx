@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField } from "@mui/material";
-import React, { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { ProjectResponse } from "../../types/projectTypes";
 
 const NewProjectForm = styled.form`
   display: flex;
@@ -42,66 +42,72 @@ const NewProjectForm = styled.form`
 
 const ProjectForm = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
   const blankForm: ProjectFormData = {
-    preview: "",
+    preview: null,
     repo: "",
     production: "",
   };
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, submitCount },
-    setValue,
-    watch,
-  } = useForm<ProjectFormData>({
-    defaultValues: blankForm,
-  });
+  const [formData, setFormData] = useState(project ?? blankForm);
+
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.files ? event.target.files.item(0) : null,
+    });
+  };
+
+  const onDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [event.target.id]: event.target.value });
+  };
 
   useEffect(() => {
     if (project) {
-      setValue("preview", project.preview);
-      setValue("repo", project.repo);
-      setValue("production", project.production);
+      setFormData({ ...project });
     }
-  }, [project, setValue]);
+  }, [project]);
 
-  const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/g;
-  const formInputs = watch();
-  const isFilled = Object.values(formInputs).every((imput) => imput !== "");
-  const isDisabled = !isFilled || submitCount === 1;
+  const isValidUrl = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=/%+.*!'(),$_{}^~[\]`#|]+)/;
+  const isFilled = Object.values(formData).every((input) => input !== "");
+  const isDisabled = !isFilled;
 
   return (
-    <NewProjectForm onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="preview"
-        control={control}
-        render={({ field }) => (
-          <TextField variant="outlined" {...field} label={field.name} />
-        )}
-      />
+    <NewProjectForm
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit(formData as ProjectFormData);
+      }}
+    >
+      <Button
+        variant="outlined"
+        component="label"
+        color={formData.preview ? "success" : "primary"}
+      >
+        Preview (Upload File)
+        <input id="preview" onChange={onFileChange} type="file" hidden />
+      </Button>
+
       <div className="form-control">
-        <Controller
-          name="repo"
-          control={control}
-          render={({ field }) => (
-            <TextField variant="outlined" {...field} label={field.name} />
-          )}
-          rules={{ pattern: isValidUrl }}
+        <TextField
+          variant="outlined"
+          value={formData.production}
+          onChange={onDataChange}
+          label="production"
+          id="production"
         />
-        {errors.repo && errors.repo.type ? (
+        {formData.production && !isValidUrl.test(formData.production) ? (
           <p className="error-message">repo must be a valid URL</p>
         ) : null}
       </div>
+
       <div className="form-control">
-        <Controller
-          name="production"
-          control={control}
-          render={({ field }) => (
-            <TextField variant="outlined" {...field} label={field.name} />
-          )}
-          rules={{ pattern: isValidUrl }}
+        <TextField
+          variant="outlined"
+          onChange={onDataChange}
+          value={formData.repo}
+          label="repo"
+          id="repo"
         />
-        {errors.production && errors.production.type ? (
+        {formData.repo && !isValidUrl.test(formData.repo) ? (
           <p className="error-message">production must be a valid URL</p>
         ) : null}
       </div>
@@ -116,11 +122,11 @@ export default ProjectForm;
 
 interface NewProjectProps {
   onSubmit: (data: ProjectFormData) => void;
-  project?: ProjectFormData;
+  project?: ProjectFormData | ProjectResponse;
 }
 
 export interface ProjectFormData {
-  preview: string;
+  preview: File | null;
   repo: string;
   production: string;
 }

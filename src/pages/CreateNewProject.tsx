@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import NewProject, {
+import ProjectForm, {
   ProjectFormData,
 } from "../components/ProjectForm/ProjectForm";
 import { createProjectThunk } from "../redux/thunks/project/projectThunks";
@@ -11,7 +11,7 @@ const CreateNewProject = (): JSX.Element => {
   const onSubmit = (data: ProjectFormData) => {
     dispatch(createProjectThunk({ ...data }, navigate));
   };
-  return <NewProject onSubmit={onSubmit} />;
+  return <ProjectForm onSubmit={onSubmit} />;
 };
 
 export default CreateNewProject;

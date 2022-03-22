@@ -107,13 +107,20 @@ export const editProjectThunk =
     const notificationID = toast.loading("updating...", {
       ...defaultToast,
     });
+    const editedProject = new FormData();
+    editedProject.append("preview", projectData.preview as Blob);
+    editedProject.append("repo", projectData.repo);
+    editedProject.append("production", projectData.production);
+    editedProject.append("author", projectToEdit.author.id);
+    editedProject.append("id", projectToEdit.id);
+    editedProject.append("likes", `${projectToEdit.likes}`);
+
     const response = await fetch(`${process.env.VITE_API_URL}projects/edit`, {
       method: "put",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ ...projectToEdit, ...projectData }),
+      body: editedProject,
     });
 
     if (response.ok) {
@@ -147,14 +154,18 @@ export const createProjectThunk =
     const { id }: TokenContent = jwtDecode(
       localStorage.getItem("token") as string
     );
+    const newProject = new FormData();
+    newProject.append("preview", projectData.preview as Blob);
+    newProject.append("repo", projectData.repo);
+    newProject.append("production", projectData.production);
+    newProject.append("author", id);
 
     const response = await fetch(`${process.env.VITE_API_URL}projects/new`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ ...projectData, author: id }),
+      body: newProject,
     });
 
     if (response.ok) {

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import NewProject, {
+import ProjectForm, {
   ProjectFormData,
 } from "../components/ProjectForm/ProjectForm";
 import { RootState } from "../redux/store";
@@ -19,9 +19,9 @@ const EditProject = (): JSX.Element => {
     );
   };
   return (
-    <NewProject
+    <ProjectForm
       onSubmit={onSubmit}
-      project={projectToEdit as ProjectFormData}
+      project={projectToEdit as ProjectResponse}
     />
   );
 };
