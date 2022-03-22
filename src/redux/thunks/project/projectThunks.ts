@@ -147,14 +147,18 @@ export const createProjectThunk =
     const { id }: TokenContent = jwtDecode(
       localStorage.getItem("token") as string
     );
+    const newProject = new FormData();
+    newProject.append("preview", projectData.preview as Blob);
+    newProject.append("repo", projectData.repo);
+    newProject.append("production", projectData.production);
+    newProject.append("author", id);
 
     const response = await fetch(`${process.env.VITE_API_URL}projects/new`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ ...projectData, author: id }),
+      body: newProject,
     });
 
     if (response.ok) {
