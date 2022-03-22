@@ -2,6 +2,7 @@
 import { Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { ProjectResponse } from "../../types/projectTypes";
 
 const NewProjectForm = styled.form`
   display: flex;
@@ -73,7 +74,7 @@ const ProjectForm = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
     <NewProjectForm
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit(formData);
+        onSubmit(formData as ProjectFormData);
       }}
     >
       <Button
@@ -121,7 +122,7 @@ export default ProjectForm;
 
 interface NewProjectProps {
   onSubmit: (data: ProjectFormData) => void;
-  project?: ProjectFormData;
+  project?: ProjectFormData | ProjectResponse;
 }
 
 export interface ProjectFormData {

@@ -21,7 +21,7 @@ const EditProject = (): JSX.Element => {
   return (
     <ProjectForm
       onSubmit={onSubmit}
-      project={projectToEdit as ProjectFormData}
+      project={projectToEdit as ProjectResponse}
     />
   );
 };
