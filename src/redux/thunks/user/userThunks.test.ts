@@ -33,12 +33,11 @@ describe("Given a login user thunk", () => {
 describe("Given a register user thunk", () => {
   describe("When it's called passing a user", () => {
     test("Then something", async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const avatar: any = {
+      const avatar = {
         name: "image.png",
         size: 50000,
         type: "image/png",
-      };
+      } as File;
       const user = {
         username: "paco",
         name: "paco",

@@ -2,11 +2,15 @@ import { toast } from "react-toastify";
 import { deleteProjectActionCreator } from "../../actions/projects/projectActionCreators";
 import {
   deleteProjectThunk,
+  editProjectThunk,
   loadProjectsThunk,
 } from "../project/projectThunks";
 import { server } from "../../../mocks/server";
 import { errorHandlers } from "../../../mocks/handlers";
 import { credentials, rejected } from "../../../toastConfigs";
+import { ProjectFormData } from "../../../components/ProjectForm/ProjectForm";
+import { ProjectResponse } from "../../../types/projectTypes";
+import { generateRandomProject } from "../../../mocks/projects";
 
 const mockLocalStorage = {
   removeItem: jest.fn(),
@@ -119,6 +123,86 @@ describe("Given a delete project thunk", () => {
       await deleteProject(dispatch);
 
       expect(mockToastUpdate).toHaveBeenCalledWith(toastId, rejected);
+    });
+  });
+});
+
+describe("Given an editProjectThunk", () => {
+  describe("When it's called with navigate, project formData, and a project to update", () => {
+    test("Then if the response resolves ok it should call dispatch with editproject action, navigate to '/', and toast update", async () => {
+      const expectedDestination = "/";
+      const navigate = jest.fn();
+      const dispatch = jest.fn();
+      const preview = {} as File;
+      const projectData: ProjectFormData = {
+        preview,
+        production: "nutohenut",
+        repo: "stnuhenot",
+      };
+      const projectToEdit: ProjectResponse = generateRandomProject();
+
+      const editProject = editProjectThunk(
+        projectData,
+        projectToEdit,
+        navigate
+      );
+      await editProject(dispatch);
+
+      expect(dispatch).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith(expectedDestination);
+    });
+  });
+
+  describe("When it's called and an error occurs", () => {
+    test("Then it should call toast update with rejected config", async () => {
+      const preview = {} as File;
+      const projectData: ProjectFormData = {
+        preview,
+        production: "nutohenut",
+        repo: "stnuhenot",
+      };
+      const projectToEdit: ProjectResponse = generateRandomProject();
+
+      const dispatch = () => {
+        throw new Error();
+      };
+      const navigate = () => null;
+
+      const editProject = editProjectThunk(
+        projectData,
+        projectToEdit,
+        navigate
+      );
+      await editProject(dispatch);
+
+      expect(mockToastUpdate).toHaveBeenCalledWith(toastId, rejected);
+    });
+  });
+
+  describe("When it's called and the respond has status 402", () => {
+    test("Then it should call navigate to login, toast update with credentials settings, and localstorage removeItem", async () => {
+      server.use(...errorHandlers);
+      const preview = {} as File;
+      const projectData: ProjectFormData = {
+        preview,
+        production: "nutohenut",
+        repo: "stnuhenot",
+      };
+      const projectToEdit: ProjectResponse = generateRandomProject();
+      const expectedDestination = "/login";
+      const dispatch = () => null;
+      const navigate = jest.fn();
+
+      const editProject = editProjectThunk(
+        projectData,
+        projectToEdit,
+        navigate
+      );
+      await editProject(dispatch);
+
+      expect(navigate).toHaveBeenCalledWith(expectedDestination);
+      expect(mockToastUpdate).toHaveBeenCalledWith(toastId, credentials);
+      expect(mockLocalStorage.removeItem).toHaveBeenCalled();
     });
   });
 });
