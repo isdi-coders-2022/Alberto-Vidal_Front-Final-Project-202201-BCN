@@ -1,5 +1,3 @@
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as redux from "react-redux";
@@ -37,20 +35,6 @@ describe("Given an editProject page", () => {
       userEvent.click(button);
 
       expect(mockDispatch).toHaveBeenCalled();
-    });
-  });
-
-  describe("When it's rendered", () => {
-    test("Then it should match snapshot", () => {
-      const view = render(
-        <BrowserRouter>
-          <Provider store={store}>
-            <EditProject />
-          </Provider>
-        </BrowserRouter>
-      );
-
-      expect(view).toMatchSnapshot();
     });
   });
 });
