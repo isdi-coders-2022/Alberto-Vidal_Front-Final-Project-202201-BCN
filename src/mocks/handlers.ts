@@ -42,4 +42,7 @@ export const errorHandlers = [
   rest.put<DefaultRequestBody>(`${url}projects/edit`, (req, res, ctx) =>
     res(ctx.status(403))
   ),
+  rest.post<DefaultRequestBody>(`${url}projects/new`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
 ];

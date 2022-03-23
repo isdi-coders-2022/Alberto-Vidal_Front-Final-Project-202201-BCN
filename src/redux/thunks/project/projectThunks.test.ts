@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
+import * as jwt from "jwt-decode";
 import { deleteProjectActionCreator } from "../../actions/projects/projectActionCreators";
 import {
+  createProjectThunk,
   deleteProjectThunk,
   editProjectThunk,
   loadProjectsThunk,
@@ -19,6 +21,8 @@ const mockLocalStorage = {
 Object.defineProperty(window, "localStorage", {
   value: mockLocalStorage,
 });
+
+jest.spyOn(jwt, "default").mockReturnValue("");
 
 const mockToastUpdate = jest.spyOn(toast, "update");
 const toastId = "toast";
@@ -203,6 +207,67 @@ describe("Given an editProjectThunk", () => {
       expect(navigate).toHaveBeenCalledWith(expectedDestination);
       expect(mockToastUpdate).toHaveBeenCalledWith(toastId, credentials);
       expect(mockLocalStorage.removeItem).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a create project thunk", () => {
+  describe("When it's called with project data and navigate", () => {
+    test("Then it should call navigate to '/' and dispatch", async () => {
+      const ProjectData: ProjectFormData = {
+        preview: {} as File,
+        production: "uau",
+        repo: "uoeu",
+      };
+      const navigate = jest.fn();
+      const expectedDestination = "/";
+      const dispatch = jest.fn();
+
+      const createProject = createProjectThunk(ProjectData, navigate);
+      await createProject(dispatch);
+
+      expect(navigate).toHaveBeenCalledWith(expectedDestination);
+      expect(dispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it's called and receives a response with 403 status", () => {
+    test("Then it should call navigate to login and toast update with credentials settings", async () => {
+      server.use(...errorHandlers);
+      const dispatch = () => null;
+      const navigate = jest.fn();
+      const expectedDestination = "/login";
+      const ProjectData: ProjectFormData = {
+        preview: {} as File,
+        production: "uau",
+        repo: "uoeu",
+      };
+
+      const createProject = createProjectThunk(ProjectData, navigate);
+      await createProject(dispatch);
+
+      expect(navigate).toHaveBeenCalledWith(expectedDestination);
+      expect(mockToastUpdate).toHaveBeenCalledWith(toastId, credentials);
+    });
+  });
+
+  describe("When an error occurs", () => {
+    test("Then it should call toast update with rejected config", async () => {
+      const dispatch = () => {
+        throw new Error();
+      };
+      const navigate = () => null;
+
+      const ProjectData: ProjectFormData = {
+        preview: {} as File,
+        production: "uau",
+        repo: "uoeu",
+      };
+
+      const createProject = createProjectThunk(ProjectData, navigate);
+      await createProject(dispatch);
+
+      expect(mockToastUpdate).toHaveBeenCalledWith(toastId, rejected);
     });
   });
 });

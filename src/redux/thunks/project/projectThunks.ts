@@ -156,46 +156,49 @@ export const editProjectThunk =
 export const createProjectThunk =
   (projectData: ProjectFormData, navigate: NavigateFunction) =>
   async (dispatch: ThunkDispatch<RootState, void, CreateProjectAction>) => {
-    const notificationID = toast.loading("deleting...", {
-      ...defaultToast,
-    });
+    let notificationID;
+    try {
+      notificationID = toast.loading("creatig...", {
+        ...defaultToast,
+      });
 
-    const { id }: TokenContent = jwtDecode(
-      localStorage.getItem("token") as string
-    );
-    const newProject = new FormData();
-    newProject.append("preview", projectData.preview as Blob);
-    newProject.append("repo", projectData.repo);
-    newProject.append("production", projectData.production);
-    newProject.append("author", id);
+      const { id }: TokenContent = jwtDecode(
+        localStorage.getItem("token") as string
+      );
+      const newProject = new FormData();
+      newProject.append("preview", projectData.preview as Blob);
+      newProject.append("repo", projectData.repo);
+      newProject.append("production", projectData.production);
+      newProject.append("author", id);
 
-    const response = await fetch(`${process.env.VITE_API_URL}projects/new`, {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: newProject,
-    });
+      const response = await fetch(`${process.env.VITE_API_URL}projects/new`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: newProject,
+      });
 
-    if (response.ok) {
-      const createdProject = await response.json();
-      dispatch(createProjectActionCreator(createdProject));
-      toast.update(notificationID, { ...created });
-      navigate("/");
-      return;
+      if (response.ok) {
+        const createdProject = await response.json();
+        dispatch(createProjectActionCreator(createdProject));
+        toast.update(notificationID, { ...created });
+        navigate("/");
+        return;
+      }
+      if (
+        response.status === 403 &&
+        window.location.pathname !== "/register" &&
+        window.location.pathname !== "/login"
+      ) {
+        navigate("/login");
+        localStorage.removeItem("token");
+        toast.update(notificationID, credentials);
+        return;
+      }
+    } catch (error) {
+      toast.update(notificationID as ReactText, { ...rejected });
     }
-    if (
-      response.status === 403 &&
-      window.location.pathname !== "/register" &&
-      window.location.pathname !== "/login"
-    ) {
-      navigate("/login");
-      localStorage.removeItem("token");
-      toast.update(notificationID, credentials);
-      return;
-    }
-
-    toast.update(notificationID, { ...rejected });
   };
 
 interface TokenContent {
