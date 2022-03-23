@@ -9,6 +9,7 @@ import CreateNewProject from "./pages/CreateNewProject";
 import EditProject from "./pages/EditProject";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import { loadUserActionCreator } from "./redux/actions/user/userActionCreators";
 import { Author } from "./types/projectTypes";
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/edit/:id" element={<EditProject />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <ToastContainer
         position="top-right"
