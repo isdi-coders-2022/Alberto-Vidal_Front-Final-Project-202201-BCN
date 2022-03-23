@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import BottomBar from "./components/BottomBar/BottomBar";
 import Navbar from "./components/Navbar/Navbar";
 import CreateNewProject from "./pages/CreateNewProject";
 import EditProject from "./pages/EditProject";
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/edit/:id" element={<EditProject />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <BottomBar />
       <ToastContainer
         position="top-right"
         autoClose={5000}
