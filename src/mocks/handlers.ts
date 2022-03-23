@@ -27,4 +27,22 @@ export const handlers = [
   rest.post<DefaultRequestBody>(`${url}user/register`, (req, res, ctx) =>
     res(ctx.status(200))
   ),
+  rest.put<DefaultRequestBody>(`${url}projects/edit`, (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(generateRandomProject()))
+  ),
+];
+
+export const errorHandlers = [
+  rest.get<DefaultRequestBody>(`${url}projects/all`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
+  rest.delete<DefaultRequestBody>(`${url}projects/delete/*`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
+  rest.put<DefaultRequestBody>(`${url}projects/edit`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
+  rest.post<DefaultRequestBody>(`${url}projects/new`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
 ];
