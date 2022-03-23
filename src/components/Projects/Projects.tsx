@@ -33,6 +33,11 @@ const ProjectsList = styled.ul`
       width: 98%;
     }
   }
+  @media (max-width: 416px) {
+    & {
+      padding: 0;
+    }
+  }
 `;
 
 const Projects = ({ projects }: ProjectsProps): JSX.Element => {
