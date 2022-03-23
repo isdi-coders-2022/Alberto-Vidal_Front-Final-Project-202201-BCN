@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -33,54 +33,72 @@ const SubmitGroup = styled.div`
 `;
 
 const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
-  const {
-    control,
-    handleSubmit,
-    formState: { dirtyFields },
-  } = useForm<UserFormData>();
+  const blankForm = isLogin
+    ? {
+        username: "",
+        password: "",
+      }
+    : {
+        username: "",
+        password: "",
+        name: "",
+        avatar: null,
+      };
+
+  const [formData, setFormData] = useState(blankForm);
+
+  const onDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [event.target.id]: event.target.value });
+  };
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.files ? event.target.files.item(0) : null,
+    });
+  };
+
+  const isFilled = Object.values(formData).every((input) => input !== "");
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={(event: React.SyntheticEvent) => {
+        event.preventDefault();
+        onSubmit(formData);
+      }}
+    >
       {!isLogin && (
         <>
-          <Controller
-            name="avatar"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField variant="outlined" {...field} label={field.name} />
-            )}
-          />
-          <Controller
-            name="name"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField variant="outlined" {...field} label={field.name} />
-            )}
+          <Button
+            variant="outlined"
+            component="label"
+            color={formData.avatar ? "success" : "primary"}
+          >
+            Avatar (Upload File)
+            <input id="avatar" onChange={onFileChange} type="file" hidden />
+          </Button>
+          <TextField
+            onChange={onDataChange}
+            variant="outlined"
+            label="name"
+            value={formData.name}
+            id="name"
           />
         </>
       )}
-      <Controller
-        name="username"
-        defaultValue=""
-        control={control}
-        render={({ field }) => (
-          <TextField variant="outlined" {...field} label={field.name} />
-        )}
+      <TextField
+        onChange={onDataChange}
+        variant="outlined"
+        label="username"
+        value={formData.username}
+        id="username"
       />
-      <Controller
-        name="password"
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            type="password"
-            variant="outlined"
-            {...field}
-            label={field.name}
-          />
-        )}
+      <TextField
+        onChange={onDataChange}
+        type="password"
+        variant="outlined"
+        label="password"
+        value={formData.password}
+        id="password"
       />
 
       <SubmitGroup>
@@ -90,20 +108,7 @@ const UserForm = ({ isLogin, onSubmit }: UserFormProps): JSX.Element => {
           <Link to="/login">already registred?</Link>
         )}
 
-        <Button
-          variant="contained"
-          type="submit"
-          disabled={
-            isLogin
-              ? !(dirtyFields.username && dirtyFields.password)
-              : !(
-                  dirtyFields.username &&
-                  dirtyFields.password &&
-                  dirtyFields.avatar &&
-                  dirtyFields.name
-                )
-          }
-        >
+        <Button variant="contained" type="submit" disabled={!isFilled}>
           {isLogin ? "log in" : "register"}
         </Button>
       </SubmitGroup>
@@ -116,7 +121,7 @@ export interface UserFormData {
   username: string;
   name?: string;
   password: string;
-  avatar?: string;
+  avatar?: File | null;
 }
 
 interface UserFormProps {

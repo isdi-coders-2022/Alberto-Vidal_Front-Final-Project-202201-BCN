@@ -28,12 +28,19 @@ describe("Given a login user thunk", () => {
 describe("Given a register user thunk", () => {
   describe("When it's called passing a user", () => {
     test("Then something", async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const avatar: any = {
+        name: "image.png",
+        size: 50000,
+        type: "image/png",
+      };
       const user = {
         username: "paco",
         name: "paco",
         password: "1234",
-        avatar: "image.png",
+        avatar,
       };
+
       const navigate = jest.fn();
       const registerUser = registerUserThunk(user, navigate);
 
