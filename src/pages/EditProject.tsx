@@ -13,6 +13,7 @@ const EditProject = (): JSX.Element => {
   const { id } = useParams();
   const projects = useSelector((state: RootState) => state.projects);
   const projectToEdit = projects.find((project) => project.id === id);
+
   const onSubmit = (data: ProjectFormData) => {
     dispatch(
       editProjectThunk(data, projectToEdit as ProjectResponse, navigate)
