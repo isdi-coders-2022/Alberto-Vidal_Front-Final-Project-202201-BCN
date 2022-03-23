@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as redux from "react-redux";
+import EditProject from "./EditProject";
 import { generateRandomProjects } from "../mocks/projects";
 import store from "../redux/store";
-import EditProject from "./EditProject";
 
 const mockDispatch = jest.fn();
 jest.spyOn(redux, "useDispatch").mockImplementation(() => mockDispatch);
