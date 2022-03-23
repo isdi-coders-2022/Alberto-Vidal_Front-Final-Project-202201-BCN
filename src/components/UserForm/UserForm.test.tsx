@@ -126,4 +126,32 @@ describe("Given a UserForm component", () => {
       await waitFor(() => expect(onSubmit).toHaveBeenCalled());
     });
   });
+
+  describe("When it's rendered with islogin true", () => {
+    test("Then it should match snapshot", async () => {
+      const isLogin = true;
+      const onSubmit = () => null;
+
+      const view = render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
+      expect(view).toMatchSnapshot();
+    });
+  });
+
+  describe("When it's rendered with islogin false", () => {
+    test("Then it should match snapshot", async () => {
+      const isLogin = false;
+      const onSubmit = () => null;
+
+      const view = render(
+        <BrowserRouter>
+          <UserForm isLogin={isLogin} onSubmit={onSubmit} />
+        </BrowserRouter>
+      );
+      expect(view).toMatchSnapshot();
+    });
+  });
 });
