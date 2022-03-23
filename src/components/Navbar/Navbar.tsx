@@ -48,6 +48,10 @@ const Navbar = (): JSX.Element => {
     event.preventDefault();
     navigate("/");
   };
+  const gotoProfile = (event: React.MouseEvent<HTMLElement>): void => {
+    event.preventDefault();
+    navigate("/profile");
+  };
 
   return (
     <Bar>
@@ -66,12 +70,14 @@ const Navbar = (): JSX.Element => {
         </Link>
       </NavigationButtons>
 
-      <User
-        className="author-image"
-        alt={user?.username}
-        src={user?.avatar}
-        visible={!!user?.avatar}
-      />
+      <a href="profile" onClick={gotoProfile}>
+        <User
+          className="author-image"
+          alt={user?.username}
+          src={user?.avatar}
+          visible={!!user?.avatar}
+        />
+      </a>
     </Bar>
   );
 };
