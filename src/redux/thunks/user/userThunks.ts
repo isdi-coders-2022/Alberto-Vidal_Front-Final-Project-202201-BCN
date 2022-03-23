@@ -14,12 +14,16 @@ import { RootState } from "../../store";
 export const registerUserThunk =
   (userData: User, navigate: NavigateFunction) => async (): Promise<void> => {
     const notificationID = toast.loading("registering...", { ...defaultToast });
+
+    const editedProject = new FormData();
+    editedProject.append("username", userData.username);
+    editedProject.append("password", userData.password);
+    editedProject.append("avatar", userData.avatar as Blob);
+    editedProject.append("name", userData.name as string);
+
     const response = await fetch(`${process.env.VITE_API_URL}user/register`, {
       method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
+      body: editedProject,
     });
 
     if (response.ok) {
@@ -76,5 +80,5 @@ interface User {
   username: string;
   password: string;
   name?: string;
-  avatar?: string;
+  avatar?: File | null;
 }
