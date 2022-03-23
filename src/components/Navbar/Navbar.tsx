@@ -1,11 +1,9 @@
-import HomeIcon from "@mui/icons-material/Home";
-import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
-import GroupsIcon from "@mui/icons-material/Groups";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { RootState } from "../../redux/store";
+import NavigationButtons from "../NavigationButtons/NavigationButtons";
 
 const Bar = styled.header`
   padding: 0 20px;
@@ -19,14 +17,11 @@ const Bar = styled.header`
     color: inherit;
     text-decoration: none;
   }
-`;
-const NavigationButtons = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  width: 500px;
-  margin: 0 40px;
+  @media (max-width: 475px) {
+    & nav {
+      display: none;
+    }
+  }
 `;
 const Title = styled.h1`
   font-family: "Sansita Swashed";
@@ -58,17 +53,8 @@ const Navbar = (): JSX.Element => {
       <a href="/" onClick={goToHome}>
         <Title>ProjectSnap</Title>
       </a>
-      <NavigationButtons>
-        <Link to="/" title="home">
-          <HomeIcon sx={{ fontSize: 40 }} />
-        </Link>
-        <a href="friends" title="friends">
-          <GroupsIcon sx={{ fontSize: 40 }} />
-        </a>
-        <Link to="/new" title="new project">
-          <CreateNewFolderIcon sx={{ fontSize: 40 }} />
-        </Link>
-      </NavigationButtons>
+
+      <NavigationButtons />
 
       <a href="profile" onClick={gotoProfile}>
         <User

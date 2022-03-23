@@ -33,11 +33,14 @@ const ProjectsList = styled.ul`
       width: 98%;
     }
   }
+  @media (max-width: 416px) {
+    & {
+      padding: 0;
+    }
+  }
 `;
 
 const Projects = ({ projects }: ProjectsProps): JSX.Element => {
-  console.log(projects);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClick = (id: string) => (event: React.MouseEvent<HTMLElement>) => {

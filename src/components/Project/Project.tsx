@@ -44,6 +44,11 @@ const Card = styled.li`
       height: 221px;
       width: 416px;
     }
+    @media (max-width: 416px) {
+      & {
+        width: 100%;
+      }
+    }
   }
 
   & .buttons {
@@ -52,6 +57,11 @@ const Card = styled.li`
     width: 100%;
     align-items: center;
     justify-content: flex-end;
+  }
+  @media (max-width: 416px) {
+    & {
+      width: 100%;
+    }
   }
 `;
 
