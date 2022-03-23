@@ -3,6 +3,11 @@ import {
   registerUserThunk,
   unloadUserThunk,
 } from "./userThunks";
+import { server } from "../../../mocks/server";
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 jest.mock("jwt-decode");
 const mockLocalStorage = { setItem: jest.fn(), removeItem: jest.fn() };

@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { ThunkDispatch } from "redux-thunk";
 import jwtDecode from "jwt-decode";
 import { NavigateFunction } from "react-router-dom";
+import { ReactText } from "react";
 import { ProjectFormData } from "../../../components/ProjectForm/ProjectForm";
 import {
   created,
@@ -32,34 +33,37 @@ export const loadProjectsThunk =
   async (
     dispatch: ThunkDispatch<RootState, void, TypeLoadProjectAction>
   ): Promise<void> => {
-    const notificationID = toast.loading("loading...", { ...defaultToast });
-    const response = await fetch(`${process.env.VITE_API_URL}projects/all`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-
-    if (response.ok) {
-      const { projects } = await response.json();
-      dispatch(loadProjectsActionCreator(projects));
-      toast.update(notificationID, {
-        ...resolved,
+    let notificationID;
+    try {
+      notificationID = toast.loading("loading...", { ...defaultToast });
+      const response = await fetch(`${process.env.VITE_API_URL}projects/all`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
-      return;
-    }
 
-    if (
-      response.status === 403 &&
-      window.location.pathname !== "/register" &&
-      window.location.pathname !== "/login"
-    ) {
-      navigate("/login");
-      localStorage.removeItem("token");
-      toast.update(notificationID, credentials);
-      return;
-    }
+      if (response.ok) {
+        const { projects } = await response.json();
+        dispatch(loadProjectsActionCreator(projects));
+        toast.update(notificationID, {
+          ...resolved,
+        });
+        return;
+      }
 
-    toast.update(notificationID, rejected);
+      if (
+        response.status === 403 &&
+        window.location.pathname !== "/register" &&
+        window.location.pathname !== "/login"
+      ) {
+        navigate("/login");
+        localStorage.removeItem("token");
+        toast.update(notificationID, credentials);
+        return;
+      }
+    } catch (error) {
+      toast.update(notificationID as ReactText, rejected);
+    }
   };
 
 export const deleteProjectThunk =
@@ -67,35 +71,37 @@ export const deleteProjectThunk =
   async (
     dispatch: ThunkDispatch<RootState, void, TypeDeleteProjectAction>
   ): Promise<void> => {
-    const notificationID = toast.loading("deleting...", { ...defaultToast });
+    let notificationID;
+    try {
+      notificationID = toast.loading("deleting...", { ...defaultToast });
+      const response = await fetch(
+        `${process.env.VITE_API_URL}projects/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          method: "delete",
+        }
+      );
 
-    const response = await fetch(
-      `${process.env.VITE_API_URL}projects/delete/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        method: "delete",
+      if (response.ok) {
+        dispatch(deleteProjectActionCreator(id));
+        toast.update(notificationID, { ...deleted });
+        return;
       }
-    );
-
-    if (response.ok) {
-      dispatch(deleteProjectActionCreator(id));
-      toast.update(notificationID, { ...deleted });
-      return;
+      if (
+        response.status === 403 &&
+        window.location.pathname !== "/register" &&
+        window.location.pathname !== "/login"
+      ) {
+        navigate("/login");
+        localStorage.removeItem("token");
+        toast.update(notificationID, credentials);
+        return;
+      }
+    } catch (error) {
+      toast.update(notificationID as ReactText, { ...rejected });
     }
-    if (
-      response.status === 403 &&
-      window.location.pathname !== "/register" &&
-      window.location.pathname !== "/login"
-    ) {
-      navigate("/login");
-      localStorage.removeItem("token");
-      toast.update(notificationID, credentials);
-      return;
-    }
-
-    toast.update(notificationID, { ...rejected });
   };
 
 export const editProjectThunk =

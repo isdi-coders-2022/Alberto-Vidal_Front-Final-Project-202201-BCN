@@ -28,3 +28,12 @@ export const handlers = [
     res(ctx.status(200))
   ),
 ];
+
+export const errorHandlers = [
+  rest.get<DefaultRequestBody>(`${url}projects/all`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
+  rest.delete<DefaultRequestBody>(`${url}projects/delete/*`, (req, res, ctx) =>
+    res(ctx.status(403))
+  ),
+];
