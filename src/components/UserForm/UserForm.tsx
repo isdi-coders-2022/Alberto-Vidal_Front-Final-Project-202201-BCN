@@ -124,7 +124,7 @@ export interface UserFormData {
   avatar?: File | null;
 }
 
-interface UserFormProps {
+export interface UserFormProps {
   isLogin?: boolean;
   onSubmit: (data: UserFormData) => void;
 }

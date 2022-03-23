@@ -120,7 +120,7 @@ const ProjectForm = ({ onSubmit, project }: NewProjectProps): JSX.Element => {
 
 export default ProjectForm;
 
-interface NewProjectProps {
+export interface NewProjectProps {
   onSubmit: (data: ProjectFormData) => void;
   project?: ProjectFormData | ProjectResponse;
 }
