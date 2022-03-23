@@ -21,6 +21,7 @@ import {
 import {
   createProjectActionCreator,
   deleteProjectActionCreator,
+  editProjectActionCreator,
   loadProjectsActionCreator,
 } from "../../actions/projects/projectActionCreators";
 import { RootState } from "../../store";
@@ -125,7 +126,7 @@ export const editProjectThunk =
 
     if (response.ok) {
       const createdProject = await response.json();
-      dispatch(createProjectActionCreator(createdProject));
+      dispatch(editProjectActionCreator(createdProject));
       navigate("/");
       toast.update(notificationID, { ...updated });
       return;
