@@ -1,7 +1,7 @@
 import { Factory } from "fishery";
 import ObjectId from "bson-objectid";
 import { faker } from "@faker-js/faker";
-import { ProjectResponse, ProjectShape } from "../types/projectTypes";
+import { ProjectResponse } from "../types/projectTypes";
 
 const projectFactory = Factory.define<ProjectResponse>(() => ({
   author: {
@@ -18,5 +18,5 @@ const projectFactory = Factory.define<ProjectResponse>(() => ({
 
 export const generateRandomProject = (): ProjectResponse =>
   projectFactory.build();
-export const generateRandomProjects = (total: number): ProjectShape[] =>
+export const generateRandomProjects = (total: number): ProjectResponse[] =>
   projectFactory.buildList(total);
