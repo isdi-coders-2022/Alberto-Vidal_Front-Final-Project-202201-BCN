@@ -9,10 +9,11 @@ const Buttons = styled.nav`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  width: 100%;
+  width: 400px;
   margin: 0 40px;
   @media (max-width: 550px) {
     & {
+      width: 100%;
       justify-content: space-evenly;
       margin: 0 auto;
     }
