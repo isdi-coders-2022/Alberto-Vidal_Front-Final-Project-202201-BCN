@@ -31,6 +31,7 @@ const ProjectsList = styled.ul`
   @media (min-width: 1500px) {
     & {
       width: 98%;
+      justify-content: space-evenly;
     }
   }
   @media (max-width: 416px) {
